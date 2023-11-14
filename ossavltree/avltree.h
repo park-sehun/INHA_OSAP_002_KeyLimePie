@@ -3,12 +3,12 @@
 
 struct node
 {
-    int key; //key°ª
-    node* left_child; //¿ŞÂÊ ÀÚ½Ä³ëµå
-    node* right_child; //¿À¸¥ÂÊ ÀÚ½Ä³ëµå
-    node* parent_node; //ºÎ¸ğ ³ëµå
-    int left_subtree_size; //¿ŞÂÊ ¼­ºêÆ®¸®ÀÇ »çÀÌÁî
-    node(int key) //»ı¼ºÀÚ ÇÔ¼ö
+    int key; //keyê°’
+    node* left_child; //ì™¼ìª½ ìì‹ë…¸ë“œ
+    node* right_child; //ì˜¤ë¥¸ìª½ ìì‹ë…¸ë“œ
+    node* parent_node; //ë¶€ëª¨ ë…¸ë“œ
+    int left_subtree_size; //ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ì˜ ì‚¬ì´ì¦ˆ
+    node(int key) //ìƒì„±ì í•¨ìˆ˜
     {
         this->key = key;
         parent_node = left_child = right_child = NULL;
@@ -19,37 +19,37 @@ struct node
 class AVLtree
 {
 public:
-    AVLtree(); //»ı¼ºÀÚ ÇÔ¼ö
-    int getHeight(node* current_node); //height¸¦ ±¸ÇÏ´Â ÇÔ¼ö 
-    int getBalanceFactor(node* current_node); //balanceFactor¸¦ ±¸ÇÏ´Â ÇÔ¼ö
-    int getDepth(node* current_node); //depth¸¦ ±¸ÇÏ´Â ÇÔ¼ö
-    node* search(node* current_node, int x); //root°¡ currnt_nodeÀÎ ¼­ºêÆ®¸®¿¡¼­ key°ªÀÌ xÀÎ ³ëµå¸¦ Ã£´Â ÇÔ¼ö
-    void balance(node* current_node); //root°¡ currnt_nodeÀÎ ¼­ºêÆ®¸®¿¡¼­ ±ÕÇüÀ» ¸ÂÃß´Â ÇÔ¼ö
-    void rightRotate(node* node_z); //rightRotate¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
-    void leftRotate(node* node_z); //leftRotate¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
-    void minimum(int x); //key°ªÀÌ xÀÎ ³ëµå°¡ ·çÆ®ÀÎ ¼­ºêÆ®¸®¿¡¼­ÀÇ ÃÖ¼Ò key¸¦ °¡Áö´Â ³ëµåÀÇ key¿Í depth¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
-    void maximum(int x); //key°ªÀÌ xÀÎ ³ëµå°¡ ·çÆ®ÀÎ ¼­ºêÆ®¸®¿¡¼­ÀÇ ÃÖ´ë key¸¦ °¡Áö´Â ³ëµåÀÇ key¿Í depth¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
-    void empty(); //tree°¡ ºñ¾îÀÖ´ÂÁö¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
-    void size(); //treeÀÇ Å©±â¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
-    void find(int x); //key °ªÀÌ xÀÎ ³ëµåÀÇ depth¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
-    int insert(int x); //key°ªÀÌ xÀÎ ³ëµå¸¦ »ğÀÔÇÏ´Â ÇÔ¼ö
-    void rank(int x); //key°ªÀÌ xÀÎ ³ëµåÀÇ depth¿Í rank¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
-    void erase(int x); //key°ªÀÌ xÀÎ ³ëµå¸¦ »èÁ¦ÇÏ´Â ÇÔ¼ö 
+    AVLtree(); //ìƒì„±ì í•¨ìˆ˜
+    int getHeight(node* current_node); //heightë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜ 
+    int getBalanceFactor(node* current_node); //balanceFactorë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
+    int getDepth(node* current_node); //depthë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
+    node* search(node* current_node, int x); //rootê°€ currnt_nodeì¸ ì„œë¸ŒíŠ¸ë¦¬ì—ì„œ keyê°’ì´ xì¸ ë…¸ë“œë¥¼ ì°¾ëŠ” í•¨ìˆ˜
+    void balance(node* current_node); //rootê°€ currnt_nodeì¸ ì„œë¸ŒíŠ¸ë¦¬ì—ì„œ ê· í˜•ì„ ë§ì¶”ëŠ” í•¨ìˆ˜
+    void rightRotate(node* node_z); //rightRotateë¥¼ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
+    void leftRotate(node* node_z); //leftRotateë¥¼ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
+    void minimum(int x); //keyê°’ì´ xì¸ ë…¸ë“œê°€ ë£¨íŠ¸ì¸ ì„œë¸ŒíŠ¸ë¦¬ì—ì„œì˜ ìµœì†Œ keyë¥¼ ê°€ì§€ëŠ” ë…¸ë“œì˜ keyì™€ depthë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+    void maximum(int x); //keyê°’ì´ xì¸ ë…¸ë“œê°€ ë£¨íŠ¸ì¸ ì„œë¸ŒíŠ¸ë¦¬ì—ì„œì˜ ìµœëŒ€ keyë¥¼ ê°€ì§€ëŠ” ë…¸ë“œì˜ keyì™€ depthë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+    void empty(); //treeê°€ ë¹„ì–´ìˆëŠ”ì§€ë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+    void size(); //treeì˜ í¬ê¸°ë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+    void find(int x); //key ê°’ì´ xì¸ ë…¸ë“œì˜ depthë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+    int insert(int x); //keyê°’ì´ xì¸ ë…¸ë“œë¥¼ ì‚½ì…í•˜ëŠ” í•¨ìˆ˜
+    void rank(int x); //keyê°’ì´ xì¸ ë…¸ë“œì˜ depthì™€ rankë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+    void erase(int x); //keyê°’ì´ xì¸ ë…¸ë“œë¥¼ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜ 
 
 private:
-    int node_num; //treeÀÇ ÀúÀåµÈ ³ëµåÀÇ ¼ıÀÚ
-    node* root; //treeÀÇ ·çÆ® ³ëµå
+    int node_num; //treeì˜ ì €ì¥ëœ ë…¸ë“œì˜ ìˆ«ì
+    node* root; //treeì˜ ë£¨íŠ¸ ë…¸ë“œ
 };
 
-AVLtree::AVLtree() //»ı¼ºÀÚ ÇÔ¼ö
+AVLtree::AVLtree() //ìƒì„±ì í•¨ìˆ˜
 {
     root = NULL;
     node_num = 0;
 }
 
-int AVLtree::getHeight(node* current_node) //height¸¦ ±¸ÇÏ´Â ÇÔ¼ö 
+int AVLtree::getHeight(node* current_node) //heightë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜ 
 {
-    if (current_node == NULL) //ÀÔ·ÂµÈ ³ëµå°¡ Á¸ÀçÇÏÁö ¾ÊÀ» °æ¿ì
+    if (current_node == NULL) //ì…ë ¥ëœ ë…¸ë“œê°€ ì¡´ì¬í•˜ì§€ ì•Šì„ ê²½ìš°
     {
         return 0;
     }
@@ -62,9 +62,9 @@ int AVLtree::getHeight(node* current_node) //height¸¦ ±¸ÇÏ´Â ÇÔ¼ö
     }
 }
 
-int AVLtree::getBalanceFactor(node* current_node) //balanceFactor¸¦ ±¸ÇÏ´Â ÇÔ¼ö
+int AVLtree::getBalanceFactor(node* current_node) //balanceFactorë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
 {
-    if (current_node == NULL) //ÀÔ·ÂµÈ ³ëµå°¡ Á¸ÀçÇÏÁö ¾ÊÀ» °æ¿ì
+    if (current_node == NULL) //ì…ë ¥ëœ ë…¸ë“œê°€ ì¡´ì¬í•˜ì§€ ì•Šì„ ê²½ìš°
     {
         return 0;
     }
@@ -72,57 +72,57 @@ int AVLtree::getBalanceFactor(node* current_node) //balanceFactor¸¦ ±¸ÇÏ´Â ÇÔ¼ö
     return balance_factor;
 }
 
-int AVLtree::getDepth(node* current_node) //depth¸¦ ±¸ÇÏ´Â ÇÔ¼ö
+int AVLtree::getDepth(node* current_node) //depthë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
 {
     return 0;
 }
 
-node* AVLtree::search(node* current_node, int x) //root°¡ currnt_nodeÀÎ ¼­ºêÆ®¸®¿¡¼­ key°ªÀÌ xÀÎ ³ëµå¸¦ Ã£´Â ÇÔ¼ö
+node* AVLtree::search(node* current_node, int x) //rootê°€ currnt_nodeì¸ ì„œë¸ŒíŠ¸ë¦¬ì—ì„œ keyê°’ì´ xì¸ ë…¸ë“œë¥¼ ì°¾ëŠ” í•¨ìˆ˜
 {
     return 0;
 }
 
-void AVLtree::balance(node* current_node) //root°¡ currnt_nodeÀÎ ¼­ºêÆ®¸®¿¡¼­ ±ÕÇüÀ» ¸ÂÃß´Â ÇÔ¼ö
+void AVLtree::balance(node* current_node) //rootê°€ currnt_nodeì¸ ì„œë¸ŒíŠ¸ë¦¬ì—ì„œ ê· í˜•ì„ ë§ì¶”ëŠ” í•¨ìˆ˜
 {
-    if (current_node == NULL) //currenr_node°¡ ¾ø´Â °æ¿ì
+    if (current_node == NULL) //currenr_nodeê°€ ì—†ëŠ” ê²½ìš°
     {
-        std::cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù./balance"
+        std::cout << "ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤./balance"
             << "\n";
         return;
     }
-    int current_node_balance_factor = getBalanceFactor(current_node); //currnet_nodeÀÇ balance factor
+    int current_node_balance_factor = getBalanceFactor(current_node); //currnet_nodeì˜ balance factor
 
-    if (current_node_balance_factor <= 1 && current_node_balance_factor >= 1) //³ôÀÌÂ÷°¡ 1ÀÌÇÏÀÎ °æ¿ì
+    if (current_node_balance_factor <= 1 && current_node_balance_factor >= 1) //ë†’ì´ì°¨ê°€ 1ì´í•˜ì¸ ê²½ìš°
     {
         return;
     }
-    else if (current_node_balance_factor > 1) //¿ŞÂÊ ÀÚ½Ä ³ëµåÀÇ ³ôÀÌ°¡ 2ÀÌ»óÀ¸·Î ´õ ³ôÀº °æ¿ì
+    else if (current_node_balance_factor > 1) //ì™¼ìª½ ìì‹ ë…¸ë“œì˜ ë†’ì´ê°€ 2ì´ìƒìœ¼ë¡œ ë” ë†’ì€ ê²½ìš°
     {
-        if (getBalanceFactor(current_node->left_child) > 1) // LL º¯È¯
+        if (getBalanceFactor(current_node->left_child) > 1) // LL ë³€í™˜
         {
             rightRotate(current_node);
         }
-        if (getBalanceFactor(current_node->left_child) < -1) // LR º¯È¯
+        if (getBalanceFactor(current_node->left_child) < -1) // LR ë³€í™˜
         {
             leftRotate(current_node->left_child);
             rightRotate(current_node);
         }
     }
-    else if (current_node_balance_factor < -1) //¿À¸¥ÂÊ ÀÚ½Ä ³ëµåÀÇ ³ôÀÌ°¡ 2ÀÌ»óÀ¸·Î ´õ ³ôÀº °æ¿ì
+    else if (current_node_balance_factor < -1) //ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œì˜ ë†’ì´ê°€ 2ì´ìƒìœ¼ë¡œ ë” ë†’ì€ ê²½ìš°
     {
-        if (getBalanceFactor(current_node->right_child) > 1) // RL º¯È¯
+        if (getBalanceFactor(current_node->right_child) > 1) // RL ë³€í™˜
         {
             rightRotate(current_node->right_child);
             leftRotate(current_node);
         }
-        if (getBalanceFactor(current_node->right_child) < -1) // RR º¯È¯
+        if (getBalanceFactor(current_node->right_child) < -1) // RR ë³€í™˜
         {
             leftRotate(current_node);
         }
     }
 }
 
-void AVLtree::rightRotate(node* node_z) //rightRotate¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
+void AVLtree::rightRotate(node* node_z) //rightRotateë¥¼ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
 {
     node* node_y = node_z->left_child;
     node* T2_root = node_y->right_child;
@@ -130,16 +130,16 @@ void AVLtree::rightRotate(node* node_z) //rightRotate¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
     node_y->right_child = node_z;
     node_z->left_child = T2_root;
 
-    if (node_z->parent_node == NULL) // node_z°¡ ·çÆ®³ëµå¿´À» °æ¿ì
+    if (node_z->parent_node == NULL) // node_zê°€ ë£¨íŠ¸ë…¸ë“œì˜€ì„ ê²½ìš°
     {
-        root = node_y; //node_y¸¦ ·çÆ®³ëÆ®·Î ¼³Á¤
+        root = node_y; //node_yë¥¼ ë£¨íŠ¸ë…¸íŠ¸ë¡œ ì„¤ì •
         node_y->parent_node = NULL;
     }
-    else if (node_z->parent_node->left_child == node_z) //node_z°¡ ºÎ¸ğ³ëµåÀÇ ¿ŞÂÊ ÀÚ½Ä ³ëµå¿´À» °æ¿ì
+    else if (node_z->parent_node->left_child == node_z) //node_zê°€ ë¶€ëª¨ë…¸ë“œì˜ ì™¼ìª½ ìì‹ ë…¸ë“œì˜€ì„ ê²½ìš°
     {
         node_z->parent_node->left_child = node_y;
     }
-    else //node_z°¡ ºÎ¸ğ³ëµåÀÇ ¿À¸¥ÂÊ ÀÚ½Ä ³ëµå¿´À» °æ¿ì
+    else //node_zê°€ ë¶€ëª¨ë…¸ë“œì˜ ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œì˜€ì„ ê²½ìš°
     {
         node_z->parent_node->right_child = node_y;
     }
@@ -147,11 +147,11 @@ void AVLtree::rightRotate(node* node_z) //rightRotate¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
     node_z->parent_node = node_y;
     T2_root->parent_node = node_z;
 
-    node_z->left_subtree_size = node_z->left_subtree_size - (node_y->left_subtree_size + 1); // node_zÀÇ ¿ŞÂÊ ¼­ºêÆ®¸®ÀÇ »çÀÌÁî º¯È­
+    node_z->left_subtree_size = node_z->left_subtree_size - (node_y->left_subtree_size + 1); // node_zì˜ ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ì˜ ì‚¬ì´ì¦ˆ ë³€í™”
     return;
 }
 
-void AVLtree::leftRotate(node* node_z) //leftRotate¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
+void AVLtree::leftRotate(node* node_z) //leftRotateë¥¼ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
 {
     node* node_y = node_z->right_child;
     node* T2_root = node_y->left_child;
@@ -159,16 +159,16 @@ void AVLtree::leftRotate(node* node_z) //leftRotate¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
     node_y->left_child = node_z;
     node_z->right_child = T2_root;
 
-    if (node_z->parent_node == NULL) // node_z°¡ ·çÆ®³ëµå¿´À» °æ¿ì
+    if (node_z->parent_node == NULL) // node_zê°€ ë£¨íŠ¸ë…¸ë“œì˜€ì„ ê²½ìš°
     {
-        root = node_y; //node_y¸¦ ·çÆ®³ëÆ®·Î ¼³Á¤
+        root = node_y; //node_yë¥¼ ë£¨íŠ¸ë…¸íŠ¸ë¡œ ì„¤ì •
         node_y->parent_node = NULL;
     }
-    else if (node_z->parent_node->left_child == node_z) //node_z°¡ ºÎ¸ğ³ëµåÀÇ ¿ŞÂÊ ÀÚ½Ä ³ëµå¿´À» °æ¿ì
+    else if (node_z->parent_node->left_child == node_z) //node_zê°€ ë¶€ëª¨ë…¸ë“œì˜ ì™¼ìª½ ìì‹ ë…¸ë“œì˜€ì„ ê²½ìš°
     {
         node_z->parent_node->left_child = node_y;
     }
-    else //node_z°¡ ºÎ¸ğ³ëµåÀÇ ¿ŞÂÊ ÀÚ½Ä ³ëµå¿´À» °æ¿ì
+    else //node_zê°€ ë¶€ëª¨ë…¸ë“œì˜ ì™¼ìª½ ìì‹ ë…¸ë“œì˜€ì„ ê²½ìš°
     {
         node_z->parent_node->right_child = node_y;
     }
@@ -176,86 +176,86 @@ void AVLtree::leftRotate(node* node_z) //leftRotate¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
     node_z->parent_node = node_y;
     T2_root->parent_node = node_z;
 
-    node_y->left_subtree_size = node_y->left_subtree_size + node_z->left_subtree_size + 1; // node_yÀÇ ¿ŞÂÊ ¼­ºêÆ®¸®ÀÇ »çÀÌÁî º¯È­
+    node_y->left_subtree_size = node_y->left_subtree_size + node_z->left_subtree_size + 1; // node_yì˜ ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ì˜ ì‚¬ì´ì¦ˆ ë³€í™”
     return;
 }
 
-void AVLtree::minimum(int x) //key°ªÀÌ xÀÎ ³ëµå°¡ ·çÆ®ÀÎ ¼­ºêÆ®¸®¿¡¼­ÀÇ ÃÖ¼Ò key¸¦ °¡Áö´Â ³ëµåÀÇ key¿Í depth¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void AVLtree::minimum(int x) //keyê°’ì´ xì¸ ë…¸ë“œê°€ ë£¨íŠ¸ì¸ ì„œë¸ŒíŠ¸ë¦¬ì—ì„œì˜ ìµœì†Œ keyë¥¼ ê°€ì§€ëŠ” ë…¸ë“œì˜ keyì™€ depthë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 {
-    node* minimum_node = search(root, x); //x¸¦ key°ªÀ¸·Î °¡Áö´Â ³ëµå
-    while (minimum_node->left_child != NULL) //³ëµå°¡ Á¸ÀçÇÒ¶§ ±îÁö ½ÇÇà
+    node* minimum_node = search(root, x); //xë¥¼ keyê°’ìœ¼ë¡œ ê°€ì§€ëŠ” ë…¸ë“œ
+    while (minimum_node->left_child != NULL) //ë…¸ë“œê°€ ì¡´ì¬í• ë•Œ ê¹Œì§€ ì‹¤í–‰
     {
-        minimum_node = minimum_node->left_child; //minimum_node¸¦ minimum_nodeÀÇ ¿ŞÂÊ ÀÚ½Ä ³ëµå·Î ¹Ù²Ş
+        minimum_node = minimum_node->left_child; //minimum_nodeë¥¼ minimum_nodeì˜ ì™¼ìª½ ìì‹ ë…¸ë“œë¡œ ë°”ê¿ˆ
     }
-    int minmum_node_depth = getDepth(minimum_node); //minimum_nodeÀÇ depth¸¦ ±¸ÇÔ
+    int minimum_node_depth = getDepth(minimum_node); //minimum_nodeì˜ depthë¥¼ êµ¬í•¨
     std::cout << minmum_node_depth << "\n";
 }
 
-void AVLtree::maximum(int x) //key°ªÀÌ xÀÎ ³ëµå°¡ ·çÆ®ÀÎ ¼­ºêÆ®¸®¿¡¼­ÀÇ ÃÖ´ë key¸¦ °¡Áö´Â ³ëµåÀÇ key¿Í depth¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void AVLtree::maximum(int x) //keyê°’ì´ xì¸ ë…¸ë“œê°€ ë£¨íŠ¸ì¸ ì„œë¸ŒíŠ¸ë¦¬ì—ì„œì˜ ìµœëŒ€ keyë¥¼ ê°€ì§€ëŠ” ë…¸ë“œì˜ keyì™€ depthë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 {
-    node* root_subtree = search(root, x); //x¸¦ key°ªÀ¸·Î °¡Áö´Â ³ëµå
+    node* root_subtree = search(root, x); //xë¥¼ keyê°’ìœ¼ë¡œ ê°€ì§€ëŠ” ë…¸ë“œ
     node* maximum_node = root_subtree;
-    while (maximum_node->right_child != NULL) //³ëµå°¡ Á¸ÀçÇÒ¶§ ±îÁö ½ÇÇà
+    while (maximum_node->right_child != NULL) //ë…¸ë“œê°€ ì¡´ì¬í• ë•Œ ê¹Œì§€ ì‹¤í–‰
     {
-        maximum_node = maximum_node->right_child; //maximum_node¸¦ minimum_nodeÀÇ ¿À¸¥ÂÊ ÀÚ½Ä ³ëµå·Î ¹Ù²Ş
+        maximum_node = maximum_node->right_child; //maximum_nodeë¥¼ minimum_nodeì˜ ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œë¡œ ë°”ê¿ˆ
     }
-    int maxmum_node_depth = getDepth(maximum_node); ////maximum_nodeÀÇ depth¸¦ ±¸ÇÔ
+    int maximum_node_depth = getDepth(maximum_node); ////maximum_nodeì˜ depthë¥¼ êµ¬í•¨
     std::cout << maxmum_node_depth << "\n";
 }
 
-void AVLtree::empty() //tree°¡ ºñ¾îÀÖ´ÂÁö¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void AVLtree::empty() //treeê°€ ë¹„ì–´ìˆëŠ”ì§€ë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 {
-    if (node_num == 0) //tree°¡ ºñ¾úÀ»¶§
+    if (node_num == 0) //treeê°€ ë¹„ì—ˆì„ë•Œ
     {
         std::cout << 1 << "\n";
         return;
     }
-    else //tree°¡ ºñ¾îÀÖÁö ¾ÊÀ» ¶§
+    else //treeê°€ ë¹„ì–´ìˆì§€ ì•Šì„ ë•Œ
     {
         std::cout << 0 << "\n";
         return;
     }
 }
 
-void AVLtree::size() //treeÀÇ Å©±â¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void AVLtree::size() //treeì˜ í¬ê¸°ë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 {
     std::cout << node_num << "\n";
     return;
 }
 
-void AVLtree::find(int x) //key °ªÀÌ xÀÎ ³ëµåÀÇ depth¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void AVLtree::find(int x) //key ê°’ì´ xì¸ ë…¸ë“œì˜ depthë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 {
 }
 
-int AVLtree::insert(int x) //key°ªÀÌ xÀÎ ³ëµå¸¦ »ğÀÔÇÏ´Â ÇÔ¼ö
+int AVLtree::insert(int x) //keyê°’ì´ xì¸ ë…¸ë“œë¥¼ ì‚½ì…í•˜ëŠ” í•¨ìˆ˜
 {
-    node* new_node = new node(x);//»õ·Î¿î ³ëµå »ı¼º
-    if (node_num == 0) //tree°¡ ºñ¾îÀÖÀ» ¶§
+    node* new_node = new node(x);//ìƒˆë¡œìš´ ë…¸ë“œ ìƒì„±
+    if (node_num == 0) //treeê°€ ë¹„ì–´ìˆì„ ë•Œ
     {
         root = new_node;
         return getDepth(new_node);
     }
 
-    node* current_node = root; //new_node°¡ »ğÀÏµÉ ³ëµå
-    node* parent_node = NULL; //ºÎ¸ğ ³ëµå°¡ µÉ ³ëµå
-    int child_factor = 0; //¿ŞÂÊ ÀÚ½Ä ³ëµåÀÎÁö ¿À¸¥ÂÊ ÀÚ½Ä ³ëµåÀÎÁö °áÁ¤ÇÏ´Â ÀÎÀÚ
+    node* current_node = root; //new_nodeê°€ ì‚½ì¼ë  ë…¸ë“œ
+    node* parent_node = NULL; //ë¶€ëª¨ ë…¸ë“œê°€ ë  ë…¸ë“œ
+    int child_factor = 0; //ì™¼ìª½ ìì‹ ë…¸ë“œì¸ì§€ ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œì¸ì§€ ê²°ì •í•˜ëŠ” ì¸ì
 
     while (current_node != NULL)
     {
         parent_node = current_node;
-        if (current_node->key > x) //current_node key°¡ xº¸´Ù Å¬ ¶§
+        if (current_node->key > x) //current_node keyê°€ xë³´ë‹¤ í´ ë•Œ
         {
             current_node = current_node->left_child;
             child_factor = -1;
         }
-        else if (current_node->key < x) //current_node key°¡ xº¸´Ù ÀÛÀ» ¶§
+        else if (current_node->key < x) //current_node keyê°€ xë³´ë‹¤ ì‘ì„ ë•Œ
         {
             current_node = current_node->right_child;
             child_factor = 1;
         }
-        else if (current_node->key == x) //x¸¦ key°ªÀ¸·Î °¡Áö´Â ³ëµå°¡ ÀÌ¹Ì Á¸ÀçÇÒ ¶§
+        else if (current_node->key == x) //xë¥¼ keyê°’ìœ¼ë¡œ ê°€ì§€ëŠ” ë…¸ë“œê°€ ì´ë¯¸ ì¡´ì¬í•  ë•Œ
         {
-            std::cout << "ÀÌ¹Ì Á¸ÀçÇÏ´Â °ªÀÔ´Ï´Ù./insert"
+            std::cout << "ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê°’ì…ë‹ˆë‹¤./insert"
                 << "\n";
             return;
         }
@@ -263,27 +263,27 @@ int AVLtree::insert(int x) //key°ªÀÌ xÀÎ ³ëµå¸¦ »ğÀÔÇÏ´Â ÇÔ¼ö
 
     new_node->parent_node = parent_node;
 
-    if (child_factor == -1) //¿ŞÂÊ ÀÚ½Ä ³ëµåÀÏ °æ¿ì
+    if (child_factor == -1) //ì™¼ìª½ ìì‹ ë…¸ë“œì¼ ê²½ìš°
     {
         parent_node->left_child = new_node;
     }
-    else if (child_factor == 1) //¿À¸¥ÂÊ ÀÚ½Ä ³ëµåÀÏ °æ¿ì
+    else if (child_factor == 1) //ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œì¼ ê²½ìš°
     {
         parent_node->right_child = new_node;
     }
-    else //¿¡·¯°¡ ÀÏ¾î³µÀ» °æ¿ì
+    else //ì—ëŸ¬ê°€ ì¼ì–´ë‚¬ì„ ê²½ìš°
     {
-        std::cout << "Àß¸øµÈ child_factor °ªÀÔ´Ï´Ù./insert"
+        std::cout << "ì˜ëª»ëœ child_factor ê°’ì…ë‹ˆë‹¤./insert"
             << "\n";
         return;
     }
     return getDepth(new_node);
 }
 
-void AVLtree::rank(int x) { //key°ªÀÌ xÀÎ ³ëµåÀÇ depth¿Í rank¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void AVLtree::rank(int x) { //keyê°’ì´ xì¸ ë…¸ë“œì˜ depthì™€ rankë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 
 }
 
-void AVLtree::erase(int x) { //key°ªÀÌ xÀÎ ³ëµå¸¦ »èÁ¦ÇÏ´Â ÇÔ¼ö 
+void AVLtree::erase(int x) { //keyê°’ì´ xì¸ ë…¸ë“œë¥¼ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜ 
 
 }
