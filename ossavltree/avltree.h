@@ -1,19 +1,15 @@
-#pragma once
+#ifndef OSSAVLTREE_OSSAVLTREE_AVLTREE_H_
+#define OSSAVLTREE_OSSAVLTREE_AVLTREE_H_
 #include <iostream>
 
 struct node
 {
-    int key; //key값
+    int key_; //key값
     node* left_child; //왼쪽 자식노드
     node* right_child; //오른쪽 자식노드
     node* parent_node; //부모 노드
     int left_subtree_size; //왼쪽 서브트리의 사이즈
-    node(int key) //생성자 함수
-    {
-        this->key = key;
-        parent_node = left_child = right_child = NULL;
-        left_subtree_size = 0;
-    }
+    node(int key):key_(key), parent_node(NULL), left_child(NULL), right_child(NULL),left_subtree_size(0) { } //생성자 함수
 };
 
 class AVLtree
@@ -41,11 +37,7 @@ private:
     node* root; //tree의 루트 노드
 };
 
-AVLtree::AVLtree() //생성자 함수
-{
-    root = NULL;
-    node_num = 0;
-}
+AVLtree::AVLtree(): root(NULL), node_num(0) { }//생성자 함수
 
 int AVLtree::getHeight(node* current_node) //height를 구하는 함수 
 {
@@ -92,7 +84,7 @@ void AVLtree::balance(node* current_node) //root가 currnt_node인 서브트리�
     }
     int current_node_balance_factor = getBalanceFactor(current_node); //currnet_node의 balance factor
 
-    if (current_node_balance_factor <= 1 && current_node_balance_factor >= 1) //높이차가 1이하인 경우
+    if (current_node_balance_factor <= 1 && current_node_balance_factor >= -1) //높이차가 1이하인 경우(balancefactor가 -1에서 1사이인 경우)
     {
         return;
     }
@@ -243,17 +235,17 @@ int AVLtree::insert(int x) //key값이 x인 노드를 삽입하는 함수
     while (current_node != NULL)
     {
         parent_node = current_node;
-        if (current_node->key > x) //current_node key가 x보다 클 때
+        if (current_node->key_ > x) //current_node key가 x보다 클 때
         {
             current_node = current_node->left_child;
             child_factor = -1;
         }
-        else if (current_node->key < x) //current_node key가 x보다 작을 때
+        else if (current_node->key_ < x) //current_node key가 x보다 작을 때
         {
             current_node = current_node->right_child;
             child_factor = 1;
         }
-        else if (current_node->key == x) //x를 key값으로 가지는 노드가 이미 존재할 때
+        else if (current_node->key_ == x) //x를 key값으로 가지는 노드가 이미 존재할 때
         {
             std::cout << "이미 존재하는 값입니다./insert"
                 << "\n";
@@ -287,3 +279,5 @@ void AVLtree::rank(int x) { //key값이 x인 노드의 depth와 rank를 출력�
 void AVLtree::erase(int x) { //key값이 x인 노드를 삭제하는 함수 
 
 }
+
+#endif
