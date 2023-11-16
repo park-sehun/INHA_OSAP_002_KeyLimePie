@@ -1,0 +1,6 @@
+﻿  main.cpp
+C:\Users\silve\source\repos\Project1\Project1\avltree.h(244,17): error C2065: 'depthg': undeclared identifier
+C:\Users\silve\source\repos\Project1\Project1\avltree.h(283,13): error C2561: 'AVLtree::insert': function must return a value
+C:\Users\silve\source\repos\Project1\Project1\avltree.h(253,14): message : see declaration of 'AVLtree::insert'
+C:\Users\silve\source\repos\Project1\Project1\avltree.h(301,9): error C2561: 'AVLtree::insert': function must return a value
+C:\Users\silve\source\repos\Project1\Project1\avltree.h(253,14): message : see declaration of 'AVLtree::insert'
