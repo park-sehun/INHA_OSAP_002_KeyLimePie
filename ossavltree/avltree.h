@@ -66,7 +66,19 @@ int AVLtree::getBalanceFactor(node* current_node) //balanceFactor를 구하는 �
 
 int AVLtree::getDepth(node* current_node) //depth를 구하는 함수
 {
-    return 0;
+    if (current_node == NULL)
+    {
+        return 0;
+    }
+
+    int depth = 0;
+    while (current_node != root) // current_node가 root 노드면 탈출
+    {
+        current_node = current_node->parent_node;
+        depth++;
+    }
+
+    return depth;
 }
 
 node* AVLtree::search(node* current_node, int x) //root가 currnt_node인 서브트리에서 key값이 x인 노드를 찾는 함수
@@ -217,6 +229,9 @@ void AVLtree::size() //tree의 크기를 출력하는 함수
 
 void AVLtree::find(int x) //key 값이 x인 노드의 depth를 출력하는 함수
 {
+    node* result = search(root, x); //key 값이 x인 노드 search
+    int depth = getDepth(result); // Get the depth of the found node
+    cout << depth << "\n";
 }
 
 int AVLtree::insert(int x) //key값이 x인 노드를 삽입하는 함수
