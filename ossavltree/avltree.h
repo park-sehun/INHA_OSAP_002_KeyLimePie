@@ -19,18 +19,20 @@ public:
     int getHeight(node* current_node); //height를 구하는 함수 
     int getBalanceFactor(node* current_node); //balanceFactor를 구하는 함수
     int getDepth(node* current_node); //depth를 구하는 함수
-    node* search(node* current_node, int x); //root가 currnt_node인 서브트리에서 key값이 x인 노드를 찾는 함수
-    void balance(node* current_node); //root가 currnt_node인 서브트리에서 균형을 맞추는 함수
-    void rightRotate(node* node_z); //rightRotate를 실행하는 함수
-    void leftRotate(node* node_z); //leftRotate를 실행하는 함수
-    void minimum(int x); //key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
-    void maximum(int x); //key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
-    void empty(); //tree가 비어있는지를 출력하는 함수
-    void size(); //tree의 크기를 출력하는 함수
-    void find(int x); //key 값이 x인 노드의 depth를 출력하는 함수
-    int insert(int x); //key값이 x인 노드를 삽입하는 함수
-    void rank(int x); //key값이 x인 노드의 depth와 rank를 출력하는 함수
-    void erase(int x); //key값이 x인 노드를 삭제하는 함수 
+    int getRank(node* current_node, int x); //key값이 x보다 작은 노드의 개수를 재귀적으로 구하는 함수
+    void UpdateLeftSubtreeSize(node* current_node);  //insert 직후 left_subtree_size를 업데이트 하는 함수
+    node* Search(node* current_node, int x); //root가 currnt_node인 서브트리에서 key값이 x인 노드를 찾는 함수
+    void Balance(node* current_node); //root가 currnt_node인 서브트리에서 균형을 맞추는 함수
+    void RightRotate(node* node_z); //rightRotate를 실행하는 함수
+    void LeftRotate(node* node_z); //leftRotate를 실행하는 함수
+    void Minimum(int x); //key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+    void Maximum(int x); //key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+    void Empty(); //tree가 비어있는지를 출력하는 함수
+    void Size(); //tree의 크기를 출력하는 함수
+    void Find(int x); //key 값이 x인 노드의 depth를 출력하는 함수
+    int Insert(int x); //key값이 x인 노드를 삽입하는 함수
+    void Rank(int x); //key값이 x인 노드의 depth와 rank를 출력하는 함수
+    void Erase(int x); //key값이 x인 노드를 삭제하는 함수 
 
 private:
     int node_num; //tree의 저장된 노드의 숫자
@@ -81,12 +83,69 @@ int AVLtree::getDepth(node* current_node) //depth를 구하는 함수
     return depth;
 }
 
-node* AVLtree::search(node* current_node, int x) //root가 currnt_node인 서브트리에서 key값이 x인 노드를 찾는 함수
-{
-    return 0;
+int AVLtree::getRank(node* current_node, int x) {  //key값이 x보다 작은 노드의 개수를 재귀적으로 구하는 함수
+    if (x == current_node->key_)  //현재 노드의 key가 x일 경우 해당 노드의 left_subtree_size값 리턴
+    {
+        return current_node->left_subtree_size;
+    }
+    else if (x < current_node->key_)  //x값이 현재 노드의 key값보다 작을 경우
+    {
+        if (current_node->left_child == NULL) //왼쪽 자식이 존재하지 않을 경우 해당 노드가 없다는 뜻이므로 탐색 실패
+        {
+            return -1;
+        }
+        else  //왼쪽 자식이 존재 할 경우 그곳으로 이동
+            return getRank(current_node->left_child, x);
+    }
+    else //x값이 현재 노드의 key값보다 클 경우
+    {
+        if (current_node->right_child == NULL)  //오른쪽 자식이 존재하지 않을 경우 해당 노드가 없다는 뜻이므로 탐색 실패
+        {
+            return -1;
+        }
+        else //오른쪽 자식이 존재하는 경우
+        {
+            int right_subtree_size = getRank(current_node->right_child, x);  //right_size를 재귀적으로 구해옴.
+            if (right_subtree_size == -1)   //x값을 가진 노드 탐색 실패 할 경우
+                return -1;
+            else  //
+                return current_node->left_subtree_size + 1 + right_subtree_size;  //현재노드의 key값이 x보다 작으므로 현재노드의 왼쪽 서브트리 사이즈 + 1 + right size 리턴
+
+        }
+    }
 }
 
-void AVLtree::balance(node* current_node) //root가 currnt_node인 서브트리에서 균형을 맞추는 함수
+void AVLtree::UpdateLeftSubtreeSize(node* current_node){  //insert 직후, rotation전에 left_subtree_size를 업데이트 하는 함수
+    if(current_node==root)  //루트 도달 시 종료 
+    {
+        return;
+    }
+    else
+    {
+        if(current_node==current_node->parent_node->left_child)  //current_node가 부모의 왼쪽 자식일 경우 부모의 left_subtree_size 1 증가
+        {
+            current_node->parent_node->left_subtree_size++;
+        }
+        return UpdateLeftSubtreeSize(current_node->parent_node);  //재귀적으로 루트까지 업데이트
+    }
+
+}
+
+node* AVLtree::Search(node* current_node, int x) //root가 current_node인 서브트리에서 key값이 x인 노드를 찾는 함수
+{
+    while (current_node != NULL) {  
+        if (x==current_node->key_) { return current_node; }  //key값이 x인 노드 발견 성공시 해당 노드 포인터 리턴
+        else if (x < current_node->key_) {  //x값이 현재 노드의 key값보다 작을 경우 현재노드의 left_child로 이동
+            current_node = current_node->left_child;
+        }
+        else {  //x값이 현재 노드의 key값보다 클 경우 현재 노드의 right_child로 이동
+            current_node = current_node->right_child;
+        }
+    }
+    return NULL;  //key가 x인 노드를 찾지 못하고 leaf 노드에 도달 한 경우 x값을 가진 노드가 없다는 뜻이므로 NULL리턴
+}
+
+void AVLtree::Balance(node* current_node) //root가 currnt_node인 서브트리에서 균형을 맞추는 함수
 {
     if (current_node == NULL) //currenr_node가 없는 경우
     {
@@ -104,29 +163,29 @@ void AVLtree::balance(node* current_node) //root가 currnt_node인 서브트리�
     {
         if (getBalanceFactor(current_node->left_child) > 1) // LL 변환
         {
-            rightRotate(current_node);
+            RightRotate(current_node);
         }
         if (getBalanceFactor(current_node->left_child) < -1) // LR 변환
         {
-            leftRotate(current_node->left_child);
-            rightRotate(current_node);
+            LeftRotate(current_node->left_child);
+            RightRotate(current_node);
         }
     }
     else if (current_node_balance_factor < -1) //오른쪽 자식 노드의 높이가 2이상으로 더 높은 경우
     {
         if (getBalanceFactor(current_node->right_child) > 1) // RL 변환
         {
-            rightRotate(current_node->right_child);
-            leftRotate(current_node);
+            RightRotate(current_node->right_child);
+            LeftRotate(current_node);
         }
         if (getBalanceFactor(current_node->right_child) < -1) // RR 변환
         {
-            leftRotate(current_node);
+            LeftRotate(current_node);
         }
     }
 }
 
-void AVLtree::rightRotate(node* node_z) //rightRotate를 실행하는 함수
+void AVLtree::RightRotate(node* node_z) //rightRotate를 실행하는 함수
 {
     node* node_y = node_z->left_child;
     node* T2_root = node_y->right_child;
@@ -155,7 +214,7 @@ void AVLtree::rightRotate(node* node_z) //rightRotate를 실행하는 함수
     return;
 }
 
-void AVLtree::leftRotate(node* node_z) //leftRotate를 실행하는 함수
+void AVLtree::LeftRotate(node* node_z) //leftRotate를 실행하는 함수
 {
     node* node_y = node_z->right_child;
     node* T2_root = node_y->left_child;
@@ -184,30 +243,30 @@ void AVLtree::leftRotate(node* node_z) //leftRotate를 실행하는 함수
     return;
 }
 
-void AVLtree::minimum(int x) //key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+void AVLtree::Minimum(int x) //key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
 {
-    node* minimum_node = search(root, x); //x를 key값으로 가지는 노드
+    node* minimum_node = Search(root, x); //x를 key값으로 가지는 노드
     while (minimum_node->left_child != NULL) //노드가 존재할때 까지 실행
     {
         minimum_node = minimum_node->left_child; //minimum_node를 minimum_node의 왼쪽 자식 노드로 바꿈
     }
     int minimum_node_depth = getDepth(minimum_node); //minimum_node의 depth를 구함
-    std::cout << minmum_node_depth << "\n";
+    std::cout << minimum_node_depth << "\n";
 }
 
-void AVLtree::maximum(int x) //key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+void AVLtree::Maximum(int x) //key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
 {
-    node* root_subtree = search(root, x); //x를 key값으로 가지는 노드
+    node* root_subtree = Search(root, x); //x를 key값으로 가지는 노드
     node* maximum_node = root_subtree;
     while (maximum_node->right_child != NULL) //노드가 존재할때 까지 실행
     {
         maximum_node = maximum_node->right_child; //maximum_node를 minimum_node의 오른쪽 자식 노드로 바꿈
     }
     int maximum_node_depth = getDepth(maximum_node); ////maximum_node의 depth를 구함
-    std::cout << maxmum_node_depth << "\n";
+    std::cout << maximum_node_depth << "\n";
 }
 
-void AVLtree::empty() //tree가 비어있는지를 출력하는 함수
+void AVLtree::Empty() //tree가 비어있는지를 출력하는 함수
 {
     if (node_num == 0) //tree가 비었을때
     {
@@ -221,20 +280,20 @@ void AVLtree::empty() //tree가 비어있는지를 출력하는 함수
     }
 }
 
-void AVLtree::size() //tree의 크기를 출력하는 함수
+void AVLtree::Size() //tree의 크기를 출력하는 함수
 {
     std::cout << node_num << "\n";
     return;
 }
 
-void AVLtree::find(int x) //key 값이 x인 노드의 depth를 출력하는 함수
+void AVLtree::Find(int x) //key 값이 x인 노드의 depth를 출력하는 함수
 {
-    node* result = search(root, x); //key 값이 x인 노드 search
+    node* result = Search(root, x); //key 값이 x인 노드 search
     int depth = getDepth(result); // Get the depth of the found node
-    cout << depth << "\n";
+    std::cout << depth << "\n";
 }
 
-int AVLtree::insert(int x) //key값이 x인 노드를 삽입하는 함수
+int AVLtree::Insert(int x) //key값이 x인 노드를 삽입하는 함수
 {
     node* new_node = new node(x);//새로운 노드 생성
     if (node_num == 0) //tree가 비어있을 때
@@ -284,14 +343,18 @@ int AVLtree::insert(int x) //key값이 x인 노드를 삽입하는 함수
             << "\n";
         return;
     }
+
+    UpdateLeftSubtreeSize(new_node);  //rotate 전 left_subtree_size 업데이트
+    Balance(new_node);
     return getDepth(new_node);
 }
 
-void AVLtree::rank(int x) { //key값이 x인 노드의 depth와 rank를 출력하는 함수
-
+void AVLtree::Rank(int x) { //key값이 x인 노드의 depth와 rank를 출력하는 함수
+    int rank_of_x = getRank(root, x) + 1; //rank값 : key값이 x보다 작은 노드의 개수 +1 
+    std::cout << rank_of_x << "\n";
 }
 
-void AVLtree::erase(int x) { //key값이 x인 노드를 삭제하는 함수 
+void AVLtree::Erase(int x) { //key값이 x인 노드를 삭제하는 함수 
 
 }
 
