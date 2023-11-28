@@ -51,7 +51,7 @@ int AVLtree::Insert(int x) //key값이 x인 노드를 삽입하는 함수
         return 0;
     }
 
-    UpdateLeftSubtreeSize(new_node);  //rotate 전 left_subtree_size 업데이트
+    UpdateLeftSubtreeSize(new_node,1);  //rotate 전 left_subtree_size 업데이트
     Balance(new_node);
     return getDepth(new_node);
 }

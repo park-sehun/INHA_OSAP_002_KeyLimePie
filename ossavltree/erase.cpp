@@ -55,7 +55,7 @@ int AVLtree::Erase(int x) { //key값이 x인 노드를 삭제하는 함수
 
     delete delete_node;
 
-    UpdateLeftSubtreeSize(child_node);  //rotate 전 left_subtree_size 업데이트
+    UpdateLeftSubtreeSize(child_node,-1);  //rotate 전 left_subtree_size 업데이트
     Balance(child_node);
 
     return depth; //depth를 출력해야 함

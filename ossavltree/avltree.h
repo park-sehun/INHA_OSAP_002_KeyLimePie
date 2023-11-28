@@ -11,7 +11,7 @@ public:
     int getBalanceFactor(node* current_node); //balanceFactor를 구하는 함수
     int getDepth(node* current_node); //depth를 구하는 함수
     int getRank(node* current_node, int x); //key값이 x보다 작은 노드의 개수를 재귀적으로 구하는 함수
-    void UpdateLeftSubtreeSize(node* current_node);  //insert 직후 left_subtree_size를 업데이트 하는 함수
+    void UpdateLeftSubtreeSize(node* current_node, int flag);  //insert(flag=1),erase(flag=-1) 직후 left_subtree_size를 업데이트 하는 함수.
     node* Search(node* current_node, int x); //root가 currnt_node인 서브트리에서 key값이 x인 노드를 찾는 함수
     void Balance(node* current_node); //root가 currnt_node인 서브트리에서 균형을 맞추는 함수
     void RightRotate(node* node_z); //rightRotate를 실행하는 함수
@@ -106,7 +106,7 @@ int AVLtree::getRank(node* current_node, int x) {  //key값이 x보다 작은 �
     }
 }
 
-void AVLtree::UpdateLeftSubtreeSize(node* current_node){  //insert 직후, rotation전에 left_subtree_size를 업데이트 하는 함수
+void AVLtree::UpdateLeftSubtreeSize(node* current_node, int flag){  //insert 직후, rotation전에 left_subtree_size를 업데이트 하는 함수
     if(current_node==root)  //루트 도달 시 종료 
     {
         return;
@@ -115,9 +115,9 @@ void AVLtree::UpdateLeftSubtreeSize(node* current_node){  //insert 직후, rotat
     {
         if(current_node==current_node->parent_node->left_child)  //current_node가 부모의 왼쪽 자식일 경우 부모의 left_subtree_size 1 증가
         {
-            current_node->parent_node->left_subtree_size++;
+            current_node->parent_node->left_subtree_size+=flag;  //insert할 경우 left_subtree_size 증가, erase일 경우 left_subtree_size 감소
         }
-        return UpdateLeftSubtreeSize(current_node->parent_node);  //재귀적으로 루트까지 업데이트
+        return UpdateLeftSubtreeSize(current_node->parent_node,flag);  //재귀적으로 루트까지 업데이트
     }
 
 }
