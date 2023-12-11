@@ -7,13 +7,14 @@ class AVLtree
 {
 public:
     AVLtree(); //생성자 함수
-    int getHeight(node* current_node); //height를 구하는 함수 
+    int getHeight(node* current_node); //height를 구하는 함수
     int getBalanceFactor(node* current_node); //balanceFactor를 구하는 함수
     int getDepth(node* current_node); //depth를 구하는 함수
     int getRank(node* current_node, int x); //key값이 x보다 작은 노드의 개수를 재귀적으로 구하는 함수
     void UpdateLeftSubtreeSize(node* current_node, int flag);  //insert(flag=1),erase(flag=-1) 직후 left_subtree_size를 업데이트 하는 함수.
     node* Search(node* current_node, int x); //root가 currnt_node인 서브트리에서 key값이 x인 노드를 찾는 함수
-    void Balance(node* current_node); //root가 currnt_node인 서브트리에서 균형을 맞추는 함수
+    void setHeight(node* current_node); //노드의 height 변수를 세팅해주는 함수
+    void Balance(node* current_node, bool flag); //root가 currnt_node인 서브트리에서 균형을 맞추는 함수
     void RightRotate(node* node_z); //rightRotate를 실행하는 함수
     void LeftRotate(node* node_z); //leftRotate를 실행하는 함수
     void Minimum(int x); //key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
@@ -36,14 +37,11 @@ int AVLtree::getHeight(node* current_node) //height를 구하는 함수
 {
     if (current_node == NULL) //입력된 노드가 존재하지 않을 경우
     {
-        return 0;
+        return -1;
     }
     else
     {
-        int left_child_height = getHeight(current_node->left_child);
-        int right_child_height = getHeight(current_node->right_child);
-        int max_height = std::max(left_child_height, right_child_height);
-        return max_height + 1;
+        return current_node->height;
     }
 }
 
@@ -53,7 +51,14 @@ int AVLtree::getBalanceFactor(node* current_node) //balanceFactor를 구하는 �
     {
         return 0;
     }
-    int balance_factor = getHeight(current_node->left_child) - getHeight(current_node->right_child);
+    int left_height = 0, right_height = 0;
+    if (current_node->left_child != NULL) {
+        left_height = getHeight(current_node->left_child) + 1;
+    }
+    if (current_node->right_child != NULL) {
+        right_height = getHeight(current_node->right_child) + 1;
+    }
+    int balance_factor = left_height - right_height;
     return balance_factor;
 }
 
@@ -136,44 +141,64 @@ node* AVLtree::Search(node* current_node, int x) //root가 current_node인 서�
     return NULL;  //key가 x인 노드를 찾지 못하고 leaf 노드에 도달 한 경우 x값을 가진 노드가 없다는 뜻이므로 NULL리턴
 }
 
-void AVLtree::Balance(node* current_node) //root가 currnt_node인 서브트리에서 균형을 맞추는 함수
+void AVLtree::setHeight(node* current_node) //노드의 height 변수를 세팅해주는 함수
 {
-    if (current_node == NULL) //currenr_node가 없는 경우
+    if (current_node == NULL) { return; }
+    if (current_node->left_child == NULL && current_node->right_child == NULL) {  //리프노드의 height는 0
+        current_node->height = 0;
+    }
+    else { //좌,우 자식의 height중 더 높은것 +1이 자신의 height가 됨.
+        int left_height = -1, right_height = -1;
+        if (current_node->left_child != NULL) {
+            left_height = current_node->left_child->height;
+        }
+        if (current_node->right_child != NULL) {
+            right_height = current_node->right_child->height;
+        }
+        current_node->height = std::max(left_height, right_height) + 1;
+    }
+    return setHeight(current_node->parent_node);  //재귀호출을 통해 추가된 리프노드부터 부모까지 height 업데이트
+}
+
+void AVLtree::Balance(node* current_node, bool flag) //root가 currnt_node인 서브트리에서 균형을 맞추는 함수 , flag가 true면 insert ,false면 delete
+{
+    if (current_node == NULL) //currenrt_node가 없는 경우
     {
-        std::cout << "잘못된 입력입니다./balance"
-            << "\n";
         return;
     }
     int current_node_balance_factor = getBalanceFactor(current_node); //currnet_node의 balance factor
 
     if (current_node_balance_factor <= 1 && current_node_balance_factor >= -1) //높이차가 1이하인 경우(balancefactor가 -1에서 1사이인 경우)
     {
-        return;
+        return Balance(current_node->parent_node, flag);
     }
-    else if (current_node_balance_factor > 1) //왼쪽 자식 노드의 높이가 2이상으로 더 높은 경우
+    else if (current_node_balance_factor >= 1) //왼쪽 자식 노드의 높이가 2이상으로 더 높은 경우
     {
-        if (getBalanceFactor(current_node->left_child) > 1) // LL 변환
+        if (getBalanceFactor(current_node->left_child) >= 0) // LL 변환
         {
             RightRotate(current_node);
         }
-        if (getBalanceFactor(current_node->left_child) < -1) // LR 변환
+        else // LR 변환
         {
             LeftRotate(current_node->left_child);
             RightRotate(current_node);
         }
+        if (flag) { return; }
     }
-    else if (current_node_balance_factor < -1) //오른쪽 자식 노드의 높이가 2이상으로 더 높은 경우
+    else if (current_node_balance_factor <= -1) //오른쪽 자식 노드의 높이가 2이상으로 더 높은 경우
     {
-        if (getBalanceFactor(current_node->right_child) > 1) // RL 변환
+        if (getBalanceFactor(current_node->right_child) > 0) // RL 변환
         {
             RightRotate(current_node->right_child);
             LeftRotate(current_node);
         }
-        if (getBalanceFactor(current_node->right_child) < -1) // RR 변환
+        else // RR 변환
         {
             LeftRotate(current_node);
         }
+        if (flag) { return; }
     }
+    return Balance(current_node->parent_node, flag);
 }
 
 void AVLtree::RightRotate(node* node_z) //rightRotate를 실행하는 함수
@@ -199,9 +224,13 @@ void AVLtree::RightRotate(node* node_z) //rightRotate를 실행하는 함수
     }
     node_y->parent_node = node_z->parent_node;
     node_z->parent_node = node_y;
-    T2_root->parent_node = node_z;
+    if (T2_root != NULL)
+    {
+        T2_root->parent_node = node_z;
+    }
 
     node_z->left_subtree_size = node_z->left_subtree_size - (node_y->left_subtree_size + 1); // node_z의 왼쪽 서브트리의 사이즈 변화
+    setHeight(node_z);
     return;
 }
 
@@ -228,9 +257,12 @@ void AVLtree::LeftRotate(node* node_z) //leftRotate를 실행하는 함수
     }
     node_y->parent_node = node_z->parent_node;
     node_z->parent_node = node_y;
-    T2_root->parent_node = node_z;
-
+    if (T2_root != NULL)
+    {
+        T2_root->parent_node = node_z;
+    }
     node_y->left_subtree_size = node_y->left_subtree_size + node_z->left_subtree_size + 1; // node_y의 왼쪽 서브트리의 사이즈 변화
+    setHeight(node_z);
     return;
 }
 

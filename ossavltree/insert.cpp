@@ -6,6 +6,7 @@ int AVLtree::Insert(int x) //key값이 x인 노드를 삽입하는 함수
     if (node_num == 0) //tree가 비어있을 때
     {
         root = new_node;
+        node_num++;
         return getDepth(new_node);
     }
 
@@ -30,7 +31,7 @@ int AVLtree::Insert(int x) //key값이 x인 노드를 삽입하는 함수
         {
             std::cout << "이미 존재하는 값입니다./insert"
                 << "\n";
-            return 0;
+            return -1;
         }
     }
 
@@ -48,10 +49,11 @@ int AVLtree::Insert(int x) //key값이 x인 노드를 삽입하는 함수
     {
         std::cout << "잘못된 child_factor 값입니다./insert"
             << "\n";
-        return 0;
+        return -1;
     }
-
-    UpdateLeftSubtreeSize(new_node,1);  //rotate 전 left_subtree_size 업데이트
-    Balance(new_node);
+    node_num++;
+    UpdateLeftSubtreeSize(new_node, 1);
+    setHeight(new_node);
+    Balance(new_node, true);
     return getDepth(new_node);
 }
