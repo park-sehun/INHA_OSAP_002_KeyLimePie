@@ -87,6 +87,6 @@ void Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
     setNode_num(getNode_num() + 1);
     UpdateLeftSubtreeSize(new_node, 1);
     setHeight(new_node);
-    balance(new_node, true);
+    Balance(new_node, true);
     std::cout << getDepth(new_node) << "\n";
 }

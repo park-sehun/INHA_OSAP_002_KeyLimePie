@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 void Int_AVLtree::Rank(int x)
 { // key값이 x인 노드의 depth와 rank를 출력하는 함수
-    Int_AVLtree_Node *node_of_x = search(getRoot(), x);
+    Int_AVLtree_Node *node_of_x = Search(getRoot(), x);
     if (node_of_x == NULL)
     {
         std::cout << 0 << "\n";

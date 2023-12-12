@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 void Int_AVLtree::Erase(int x)
 { // key값이 x인 노드를 삭제하는 함수
-    Int_AVLtree_Node *delete_node = search(getRoot(), x);
+    Int_AVLtree_Node *delete_node = Search(getRoot(), x);
 
     if (delete_node == NULL)
     {
@@ -104,7 +104,7 @@ void Int_AVLtree::Erase(int x)
     setHeight(tmp_parent);
     delete delete_node;
     setNode_num(getNode_num() - 1);
-    balance(tmp_parent, false);
+    Balance(tmp_parent, false);
 
     std::cout << depth << "\n"; // depth를 출력해야 함
 }
