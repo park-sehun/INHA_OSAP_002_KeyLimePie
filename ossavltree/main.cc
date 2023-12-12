@@ -2,49 +2,60 @@
 #include "set.h"
 using namespace std;
 
-int main() {
+int main()
+{
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
     int t;
     std::cin >> t;
-    while (t--) {
+    while (t--)
+    {
         int t2;
         cin >> t2;
         Int_AVLtree_set set;
         string s;
-        while (t2--) {
+        while (t2--)
+        {
             cin >> s;
             int tmp;
-            if (s == "insert") {
+            if (s == "insert")
+            {
                 cin >> tmp;
-                set.insert(tmp);
+                set.Insert(tmp);
             }
-            else if (s == "find") {
+            else if (s == "find")
+            {
                 cin >> tmp;
-                set.find(tmp);
+                set.Find(tmp);
             }
-            else if (s == "minimum") {
+            else if (s == "minimum")
+            {
                 cin >> tmp;
-                set.minimum(tmp);
+                set.Minimum(tmp);
             }
-            else if (s == "maximum") {
+            else if (s == "maximum")
+            {
                 cin >> tmp;
-                set.maximum(tmp);
+                set.Maximum(tmp);
             }
-            else if (s == "empty") {
-                set.empty();
+            else if (s == "empty")
+            {
+                set.Empty();
             }
-            else if (s == "size") {
-                set.size();
+            else if (s == "size")
+            {
+                set.Size();
             }
-            else if (s == "rank") {
+            else if (s == "rank")
+            {
                 cin >> tmp;
-                set.rank(tmp);
+                set.Rank(tmp);
             }
-            else if (s == "erase") {
+            else if (s == "erase")
+            {
                 cin >> tmp;
-                set.erase(tmp);
+                set.Erase(tmp);
             }
         }
     }
