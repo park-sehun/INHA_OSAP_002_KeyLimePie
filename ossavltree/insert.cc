@@ -1,17 +1,19 @@
-#include "avltree.h"
+#include "set.h"
 
-int AVLtree::Insert(int x) //key값이 x인 노드를 삽입하는 함수
+void Int_AVLtree::Insert(int x) //key값이 x인 노드를 삽입하는 함수
 {
-    node* new_node = new node(x);//새로운 노드 생성
+    AVLtree_Int_node_creator node_creator;
+    Int_AVLtree_Node* new_node =(Int_AVLtree_Node*) node_creator.CreateNode(x);//새로운 노드 생성
     if (node_num == 0) //tree가 비어있을 때
     {
         root = new_node;
         node_num++;
-        return getDepth(new_node);
+        std::cout<< getDepth(new_node)<<"\n";
+        return;
     }
 
-    node* current_node = root; //new_node가 삽일될 노드
-    node* parent_node = NULL; //부모 노드가 될 노드
+    Int_AVLtree_Node* current_node = root; //new_node가 삽일될 노드
+    Int_AVLtree_Node* parent_node = NULL; //부모 노드가 될 노드
     int child_factor = 0; //왼쪽 자식 노드인지 오른쪽 자식 노드인지 결정하는 인자
 
     while (current_node != NULL)
@@ -31,7 +33,7 @@ int AVLtree::Insert(int x) //key값이 x인 노드를 삽입하는 함수
         {
             std::cout << "이미 존재하는 값입니다./insert"
                 << "\n";
-            return -1;
+            return;
         }
     }
 
@@ -49,11 +51,11 @@ int AVLtree::Insert(int x) //key값이 x인 노드를 삽입하는 함수
     {
         std::cout << "잘못된 child_factor 값입니다./insert"
             << "\n";
-        return -1;
+        return;
     }
     node_num++;
-    UpdateLeftSubtreeSize(new_node, 1);
+    UpdateLeftSubtreeSize(new_node,1);
     setHeight(new_node);
-    Balance(new_node, true);
-    return getDepth(new_node);
+    balance(new_node,true);
+    std::cout << getDepth(new_node) << "\n";
 }

@@ -1,16 +1,17 @@
-#include "avltree.h"
+#include "set.h"
 
-int AVLtree::Erase(int x) { //key값이 x인 노드를 삭제하는 함수 
-    node* delete_node = Search(root, x);
+void Int_AVLtree::Erase(int x) { //key값이 x인 노드를 삭제하는 함수 
+    Int_AVLtree_Node* delete_node = search(root, x);
 
     if (delete_node == NULL) {
-        return 0;
+        std::cout << 0 << "\n";
+        return;
     }
 
     int depth = getDepth(delete_node);
 
-    node* parent_node_of_del = delete_node->parent_node;
-    node* child_node;
+    Int_AVLtree_Node* parent_node_of_del = delete_node->parent_node;
+    Int_AVLtree_Node* child_node;
 
     if (delete_node->left_child == NULL && delete_node->right_child == NULL) { //del_node의 자식 노드가 존재하지 않음
         child_node = NULL;
@@ -34,7 +35,7 @@ int AVLtree::Erase(int x) { //key값이 x인 노드를 삭제하는 함수
         child_node = delete_node->right_child;
     }
 
-    UpdateLeftSubtreeSize(delete_node, -1);  //root 삭제시 아래 if문 수행후 UpdateLeftSubtreeSize를 호출 할 경우 root가 바뀐 상태라 탈출하지 못하고 NULL 포인터를 참조하는 문제가 있으므로 미리 수행.
+    UpdateLeftSubtreeSize(delete_node, -1);
 
     if (parent_node_of_del == NULL) { //root를 삭제
         root = child_node;
@@ -54,11 +55,11 @@ int AVLtree::Erase(int x) { //key값이 x인 노드를 삭제하는 함수
             child_node->parent_node = parent_node_of_del;
         }
     }
-    node* tmp_parent = delete_node->parent_node;  //노드 삭제후 height와 balance를 수행 할 부모노드 포인터 잠시 저장
-    delete delete_node;
+    Int_AVLtree_Node* tmp_parent = delete_node->parent_node;
     setHeight(tmp_parent);
+    delete delete_node;
     node_num--;
-    Balance(tmp_parent, false);
+    balance(tmp_parent,false);
 
-    return depth; //depth를 출력해야 함
+    std::cout<< depth<<"\n"; //depth를 출력해야 함
 }
