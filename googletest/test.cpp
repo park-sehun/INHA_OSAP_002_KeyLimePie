@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../ossavltree/avltree.h"
+#include "../ossavltree/set.h"
 #include <gtest/gtest.h>
 #include <iostream>
 #include <stdexcept>
@@ -9,7 +9,7 @@ public:
 	AVLtreeTestFixture();
 	void SetUp() override;
 protected:
-	AVLtree avltree_;
+	Int_AVLtree_set set;
 };
 AVLtreeTestFixture::AVLtreeTestFixture() {
 	std::cout << "Constructor called\n";
@@ -17,12 +17,12 @@ AVLtreeTestFixture::AVLtreeTestFixture() {
 
 void AVLtreeTestFixture::SetUp() {
 	std::cout << "SetUp called\n";
-	avltree_.insert(10);
+	set.Insert(10);
 }
 
 TEST(AVLtreeTest, NULLInsert) {
-	AVLtree avltree;
-	ASSERT_EQ(0, avltree.insert(10));
+	Int_AVLtree_set set;
+	ASSERT_EQ(0, set.Insert(10));
 }
 
 TEST_F(AVLtreeTestFixture, LeftChildInsert) {
