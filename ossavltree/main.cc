@@ -52,43 +52,46 @@ int main()
             if (s == "insert")
             {
                 std::cin >> tmp;
-                std::cout<<set.Insert(tmp)<<"\n";
+                std::cout << set.Insert(tmp) << "\n";
             }
             else if (s == "find")
             {
                 std::cin >> tmp;
-                std::cout<<set.Find(tmp)<<"\n";
+                std::cout << set.Find(tmp) << "\n";
             }
             else if (s == "minimum")
             {
                 std::cin >> tmp;
-                std::pair<int,int> p = set.Minimum(tmp);
-                std::cout<<p.first<<" "<<p.second<<"\n";
+                std::pair<int, int> p = set.Minimum(tmp);
+                std::cout << p.first << " " << p.second << "\n";
             }
             else if (s == "maximum")
             {
                 std::cin >> tmp;
-                std::pair<int,int> p = set.Maximum(tmp);
-                std::cout<<p.first<<" "<<p.second<<"\n";
+                std::pair<int, int> p = set.Maximum(tmp);
+                std::cout << p.first << " " << p.second << "\n";
             }
             else if (s == "empty")
             {
-                std::cout<<set.Empty()<<"\n";
+                std::cout << set.Empty() << "\n";
             }
             else if (s == "size")
             {
-                std::cout<<set.Size()<<"\n";
+                std::cout << set.Size() << "\n";
             }
             else if (s == "rank")
             {
                 std::cin >> tmp;
-                std::pair<int,int> p = set.Rank(tmp);
-                std::cout<<p.first<<" "<<p.second<<"\n";
+                std::pair<int, int> p = set.Rank(tmp);
+                if (p.first == -1)
+                    std::cout << 0 << "\n";
+                else
+                    std::cout << p.first << " " << p.second << "\n";
             }
             else if (s == "erase")
             {
                 std::cin >> tmp;
-                std::cout<<set.Erase(tmp)<<"\n";
+                std::cout << set.Erase(tmp) << "\n";
             }
         }
     }

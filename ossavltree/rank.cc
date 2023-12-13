@@ -36,8 +36,7 @@ std::pair<int, int> Int_AVLtree::Rank(int x)
     Int_AVLtree_Node *node_of_x = Search(getRoot(), x);
     if (node_of_x == NULL)
     {
-        std::cout << 0 << "\n";
-        return;
+        return {-1,-1};
     }
     int rank_of_x = getRank(getRoot(), x) + 1; // rank값 : key값이 x보다 작은 노드의 개수 +1
     int depth = getDepth(node_of_x);
