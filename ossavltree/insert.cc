@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #include "set.h"
 
-void Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
+int Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
 {
     AVLtree_Int_node_creator node_creator;
     Int_AVLtree_Node *new_node = (Int_AVLtree_Node *)node_creator.CreateNode(x); // 새로운 노드 생성
@@ -39,8 +39,7 @@ void Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
     {
         setRoot(new_node);
         setNode_num(getNode_num() + 1);
-        std::cout << getDepth(new_node) << "\n";
-        return;
+        return getDepth(new_node);
     }
 
     Int_AVLtree_Node *current_node = getRoot(); // new_node가 삽일될 노드
@@ -62,9 +61,7 @@ void Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
         }
         else if (current_node->getKey_() == x) // x를 key값으로 가지는 노드가 이미 존재할 때
         {
-            std::cout << "이미 존재하는 값입니다./insert"
-                      << "\n";
-            return;
+            return -1;
         }
     }
 
@@ -88,5 +85,5 @@ void Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
     UpdateLeftSubtreeSize(new_node, 1);
     setHeight(new_node);
     Balance(new_node, true);
-    std::cout << getDepth(new_node) << "\n";
+    return getDepth(new_node);
 }
