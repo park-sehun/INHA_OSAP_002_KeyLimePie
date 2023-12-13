@@ -29,8 +29,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : KeyLimePie team
 작성일 : 2023년 12월 13일
 */
-#include <node.h>
+#ifndef KEYLIMEPIE_OSSAVLTREE_DATA_STRUCTURE_H_
+#define KEYLIMEPIE_OSSAVLTREE_DATA_STRUCTURE_H_
+
 #include <iostream>
+
+#include "node.h"
 
 class Ds
 {
@@ -359,7 +363,8 @@ std::pair<int, int> Int_AVLtree::Minimum(int x) // key값이 x인 노드가 루�
         minimum_node = minimum_node->getLeft_child(); // minimum_node를 minimum_node의 왼쪽 자식 노드로 바꿈
     }
     int minimum_node_depth = getDepth(minimum_node); // minimum_node의 depth를 구함
-    return {minimum_node->getKey_(), minimum_node_depth};
+
+    return std::make_pair(minimum_node->getKey_(), minimum_node_depth);
 }
 
 std::pair<int, int> Int_AVLtree::Maximum(int x) // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
@@ -371,7 +376,8 @@ std::pair<int, int> Int_AVLtree::Maximum(int x) // key값이 x인 노드가 루�
         maximum_node = maximum_node->getRight_child(); // maximum_node를 minimum_node의 오른쪽 자식 노드로 바꿈
     }
     int maximum_node_depth = getDepth(maximum_node); ////maximum_node의 depth를 구함
-    return {maximum_node->getKey_(), maximum_node_depth};
+    
+    return std::make_pair(maximum_node->getKey_(), maximum_node_depth);
 }
 
 bool Int_AVLtree::Empty() // tree가 비어있는지를 출력하는 함수
@@ -390,3 +396,5 @@ int Int_AVLtree::Size() // tree의 크기를 출력하는 함수
 {
     return getNode_num();
 }
+
+#endif

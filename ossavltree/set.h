@@ -29,11 +29,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : 김지환
 작성일 : 2023년 12월 13일
 */
-#ifndef OSSAVLTREE_OSSAVLTREE_AVLTREE_H_
-#define OSSAVLTREE_OSSAVLTREE_AVLTREE_H_
+#ifndef KEYLIMEPIE_OSSAVLTREE_SET_H_
+#define KEYLIMEPIE_OSSAVLTREE_SET_H_
+
 #include <iostream>
+
+#include "data_structure.h"
 #include "node.h"
-#include <data_structure.h>
 
 // 데이터 타입에 따라, 그리고 내부 자료 구조형에 따라 기존 클래스 수정없이 확장 가능하도록 구현
 class set
