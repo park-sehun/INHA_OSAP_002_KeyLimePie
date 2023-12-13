@@ -29,8 +29,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : KeyLimePie team
 작성일 : 2023년 12월 13일
 */
-#include <node.h>
-#include <iostream>
+#ifndef OSSAVLTREE_OSSAVLTREE_DATA_STRUCTURE_H_
+#define OSSAVLTREE_OSSAVLTREE_DATA_STRUCTURE_H_
+#include "node.h"
+
 
 class Ds
 {
@@ -390,3 +392,5 @@ int Int_AVLtree::Size() // tree의 크기를 출력하는 함수
 {
     return getNode_num();
 }
+
+#endif

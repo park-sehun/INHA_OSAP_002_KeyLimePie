@@ -2,10 +2,10 @@
 BSD-3-Clause
 Copyright (c) 2023, Jihwan Kim
 All rights reserved.
- 
+
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
- 
+
 * Redistributions of source code must retain the above copyright
 notice, this list of conditions and the following disclaimer.
 * Redistributions in binary form must reproduce the above copyright
@@ -14,7 +14,7 @@ documentation and/or other materials provided with the distribution.
 * Neither the name of the <organization> nor the
 names of its contributors may be used to endorse or promote products
 derived from this software without specific prior written permission.
- 
+
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -29,11 +29,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : 김지환
 작성일 : 2023년 12월 13일
 */
-#ifndef OSSAVLTREE_OSSAVLTREE_AVLTREE_H_
-#define OSSAVLTREE_OSSAVLTREE_AVLTREE_H_
-#include <iostream>
-#include "node.h"
-#include <data_structure.h>
+#ifndef OSSAVLTREE_OSSAVLTREE_SET_H_
+#define OSSAVLTREE_OSSAVLTREE_SET_H_
+#include "data_structure.h"
 
 // 데이터 타입에 따라, 그리고 내부 자료 구조형에 따라 기존 클래스 수정없이 확장 가능하도록 구현
 class set
@@ -43,15 +41,15 @@ class set
 class Int_set : public set
 {
 public:
-    virtual std::pair<int,int> Minimum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+    virtual std::pair<int, int> Minimum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
 
-    virtual std::pair<int,int> Maximum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+    virtual std::pair<int, int> Maximum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
 
     virtual int Find(int x) = 0; // key 값이 x인 노드의 depth를 출력하는 함수
 
     virtual int Insert(int x) = 0; // key값이 x인 노드를 삽입하는 함수
 
-    virtual std::pair<int,int> Rank(int x) = 0; // key값이 x인 노드의 depth와 rank를 출력하는 함수
+    virtual std::pair<int, int> Rank(int x) = 0; // key값이 x인 노드의 depth와 rank를 출력하는 함수
 
     virtual int Erase(int x) = 0; // key값이 x인 노드를 삭제하는 함수
 
@@ -69,11 +67,11 @@ public:
         DataStructure = (Int_AVLtree *)ds_creator.Create_Ds();
     }
 
-    std::pair<int,int> Minimum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+    std::pair<int, int> Minimum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
     {
         return DataStructure->Minimum(x);
     }
-    std::pair<int,int> Maximum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+    std::pair<int, int> Maximum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
     {
         return DataStructure->Maximum(x);
     }
@@ -85,7 +83,7 @@ public:
     {
         return DataStructure->Insert(x);
     }
-    std::pair<int,int> Rank(int x) override // key값이 x인 노드의 depth와 rank를 출력하는 함수
+    std::pair<int, int> Rank(int x) override // key값이 x인 노드의 depth와 rank를 출력하는 함수
     {
         return DataStructure->Rank(x);
     }
