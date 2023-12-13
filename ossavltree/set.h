@@ -43,21 +43,21 @@ class set
 class Int_set : public set
 {
 public:
-    virtual void Minimum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+    virtual std::pair<int,int> Minimum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
 
-    virtual void Maximum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+    virtual std::pair<int,int> Maximum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
 
-    virtual void Find(int x) = 0; // key 값이 x인 노드의 depth를 출력하는 함수
+    virtual int Find(int x) = 0; // key 값이 x인 노드의 depth를 출력하는 함수
 
-    virtual void Insert(int x) = 0; // key값이 x인 노드를 삽입하는 함수
+    virtual int Insert(int x) = 0; // key값이 x인 노드를 삽입하는 함수
 
-    virtual void Rank(int x) = 0; // key값이 x인 노드의 depth와 rank를 출력하는 함수
+    virtual std::pair<int,int> Rank(int x) = 0; // key값이 x인 노드의 depth와 rank를 출력하는 함수
 
-    virtual void Erase(int x) = 0; // key값이 x인 노드를 삭제하는 함수
+    virtual int Erase(int x) = 0; // key값이 x인 노드를 삭제하는 함수
 
-    virtual void Empty() = 0; // tree가 비어있는지를 출력하는 함수
+    virtual bool Empty() = 0; // tree가 비어있는지를 출력하는 함수
 
-    virtual void Size() = 0; // tree의 크기를 출력하는 함수
+    virtual int Size() = 0; // tree의 크기를 출력하는 함수
 };
 
 class Int_AVLtree_set : public Int_set
@@ -69,37 +69,37 @@ public:
         DataStructure = (Int_AVLtree *)ds_creator.Create_Ds();
     }
 
-    void Minimum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+    std::pair<int,int> Minimum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
     {
-        DataStructure->Minimum(x);
+        return DataStructure->Minimum(x);
     }
-    void Maximum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+    std::pair<int,int> Maximum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
     {
-        DataStructure->Maximum(x);
+        return DataStructure->Maximum(x);
     }
-    void Find(int x) override // key 값이 x인 노드의 depth를 출력하는 함수
+    int Find(int x) override // key 값이 x인 노드의 depth를 출력하는 함수
     {
-        DataStructure->Find(x);
+        return DataStructure->Find(x);
     }
-    void Insert(int x) override // key값이 x인 노드를 삽입하는 함수
+    int Insert(int x) override // key값이 x인 노드를 삽입하는 함수
     {
-        DataStructure->Insert(x);
+        return DataStructure->Insert(x);
     }
-    void Rank(int x) override // key값이 x인 노드의 depth와 rank를 출력하는 함수
+    std::pair<int,int> Rank(int x) override // key값이 x인 노드의 depth와 rank를 출력하는 함수
     {
-        DataStructure->Rank(x);
+        return DataStructure->Rank(x);
     }
-    void Erase(int x) override // key값이 x인 노드를 삭제하는 함수
+    int Erase(int x) override // key값이 x인 노드를 삭제하는 함수
     {
-        DataStructure->Erase(x);
+        return DataStructure->Erase(x);
     }
-    void Empty() override // tree가 비어있는지를 출력하는 함수
+    bool Empty() override // tree가 비어있는지를 출력하는 함수
     {
-        DataStructure->Empty();
+        return DataStructure->Empty();
     }
-    void Size() override // tree의 크기를 출력하는 함수
+    int Size() override // tree의 크기를 출력하는 함수
     {
-        DataStructure->Size();
+        return DataStructure->Size();
     }
 
 private:

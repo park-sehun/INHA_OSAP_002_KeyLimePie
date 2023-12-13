@@ -2,10 +2,10 @@
 BSD-3-Clause
 Copyright (c) 2023, Jihwan Kim
 All rights reserved.
- 
+
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
- 
+
 * Redistributions of source code must retain the above copyright
 notice, this list of conditions and the following disclaimer.
 * Redistributions in binary form must reproduce the above copyright
@@ -14,7 +14,7 @@ documentation and/or other materials provided with the distribution.
 * Neither the name of the <organization> nor the
 names of its contributors may be used to endorse or promote products
 derived from this software without specific prior written permission.
- 
+
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,62 +31,67 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #include <iostream>
 #include "set.h"
-using namespace std;
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+    std::cout.tie(NULL);
     int t;
     std::cin >> t;
     while (t--)
     {
         int t2;
-        cin >> t2;
+        std::cin >> t2;
         Int_AVLtree_set set;
-        string s;
+        std::string s;
         while (t2--)
         {
-            cin >> s;
+            std::cin >> s;
             int tmp;
             if (s == "insert")
             {
-                cin >> tmp;
-                set.Insert(tmp);
+                std::cin >> tmp;
+                std::cout << set.Insert(tmp) << "\n";
             }
             else if (s == "find")
             {
-                cin >> tmp;
-                set.Find(tmp);
+                std::cin >> tmp;
+                std::cout << set.Find(tmp) << "\n";
             }
             else if (s == "minimum")
             {
-                cin >> tmp;
-                set.Minimum(tmp);
+                std::cin >> tmp;
+                std::pair<int, int> p = set.Minimum(tmp);
+                std::cout << p.first << " " << p.second << "\n";
             }
             else if (s == "maximum")
             {
-                cin >> tmp;
-                set.Maximum(tmp);
+                std::cin >> tmp;
+                std::pair<int, int> p = set.Maximum(tmp);
+                std::cout << p.first << " " << p.second << "\n";
             }
             else if (s == "empty")
             {
-                set.Empty();
+                std::cout << set.Empty() << "\n";
             }
             else if (s == "size")
             {
-                set.Size();
+                std::cout << set.Size() << "\n";
             }
             else if (s == "rank")
             {
-                cin >> tmp;
-                set.Rank(tmp);
+                std::cin >> tmp;
+                std::pair<int, int> p = set.Rank(tmp);
+                if (p.first == -1)
+                    std::cout << 0 << "\n";
+                else
+                    std::cout << p.first << " " << p.second << "\n";
             }
             else if (s == "erase")
             {
-                cin >> tmp;
-                set.Erase(tmp);
+                std::cin >> tmp;
+                std::cout << set.Erase(tmp) << "\n";
             }
         }
     }

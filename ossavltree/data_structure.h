@@ -30,6 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성일 : 2023년 12월 13일
 */
 #include <node.h>
+#include <iostream>
 
 class Ds
 {
@@ -39,14 +40,14 @@ public:
 class Int_ds : public Ds
 {
 public:
-    virtual void Minimum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
-    virtual void Maximum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
-    virtual void Find(int x) = 0;    // key 값이 x인 노드의 depth를 출력하는 함수
-    virtual void Insert(int x) = 0;  // key값이 x인 노드를 삽입하는 함수
-    virtual void Rank(int x) = 0;    // key값이 x인 노드의 depth와 rank를 출력하는 함수
-    virtual void Erase(int x) = 0;   // key값이 x인 노드를 삭제하는 함수
-    virtual void Empty() = 0;        // tree가 비어있는지를 출력하는 함수
-    virtual void Size() = 0;         // tree의 크기를 출력하는 함수
+    virtual std::pair<int, int> Minimum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+    virtual std::pair<int, int> Maximum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+    virtual int Find(int x) = 0;                    // key 값이 x인 노드의 depth를 출력하는 함수
+    virtual int Insert(int x) = 0;                  // key값이 x인 노드를 삽입하는 함수
+    virtual std::pair<int, int> Rank(int x) = 0;    // key값이 x인 노드의 depth와 rank를 출력하는 함수
+    virtual int Erase(int x) = 0;                   // key값이 x인 노드를 삭제하는 함수
+    virtual bool Empty() = 0;                       // tree가 비어있는지를 출력하는 함수
+    virtual int Size() = 0;                         // tree의 크기를 출력하는 함수
 };
 
 class Int_AVLtree : public Int_ds
@@ -67,14 +68,14 @@ public:
     int getNode_num() { return node_num; }
     void setNode_num(int x) { node_num = x; }
 
-    void Minimum(int x) override; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
-    void Maximum(int x) override; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
-    void Find(int x) override;    // key 값이 x인 노드의 depth를 출력하는 함수
-    void Insert(int x) override;  // key값이 x인 노드를 삽입하는 함수
-    void Rank(int x) override;    // key값이 x인 노드의 depth와 rank를 출력하는 함수
-    void Erase(int x) override;   // key값이 x인 노드를 삭제하는 함수
-    void Empty() override;        // tree가 비어있는지를 출력하는 함수
-    void Size() override;         // tree의 크기를 출력하는 함수
+    std::pair<int, int> Minimum(int x) override; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+    std::pair<int, int> Maximum(int x) override; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+    int Find(int x) override;                    // key 값이 x인 노드의 depth를 출력하는 함수
+    int Insert(int x) override;                  // key값이 x인 노드를 삽입하는 함수
+    std::pair<int, int> Rank(int x) override;    // key값이 x인 노드의 depth와 rank를 출력하는 함수
+    int Erase(int x) override;                   // key값이 x인 노드를 삭제하는 함수
+    bool Empty() override;                       // tree가 비어있는지를 출력하는 함수
+    int Size() override;                         // tree의 크기를 출력하는 함수
 private:
     Int_AVLtree_Node *root; // tree의 루트 노드
     int node_num;           // tree의 저장된 노드의 숫자
@@ -214,7 +215,7 @@ Int_AVLtree_Node *Int_AVLtree::Search(Int_AVLtree_Node *current_node, int x) // 
 
 void Int_AVLtree::setHeight(Int_AVLtree_Node *current_node) // 노드의 height 변수를 세팅해주는 함수
 {
-    if (current_node == NULL) //부모 노드의 parent 혹은 Null에 도달했을 경우 재귀 종료
+    if (current_node == NULL) // 부모 노드의 parent 혹은 Null에 도달했을 경우 재귀 종료
     {
         return;
     }
@@ -225,11 +226,11 @@ void Int_AVLtree::setHeight(Int_AVLtree_Node *current_node) // 노드의 height 
     else
     { // 좌,우 자식의 height중 더 높은것 +1이 자신의 height가 됨.
         int left_height = -1, right_height = -1;
-        if (current_node->getLeft_child() != NULL)  //왼쪽자식의 height 불러오기
+        if (current_node->getLeft_child() != NULL) // 왼쪽자식의 height 불러오기
         {
             left_height = current_node->getLeft_child()->getHeight();
         }
-        if (current_node->getRight_child() != NULL)  //오른쪽 자식의 height 불러오기
+        if (current_node->getRight_child() != NULL) // 오른쪽 자식의 height 불러오기
         {
             right_height = current_node->getRight_child()->getHeight();
         }
@@ -261,7 +262,7 @@ void Int_AVLtree::Balance(Int_AVLtree_Node *current_node, bool flag) // root가 
             LeftRotate(current_node->getLeft_child());
             RightRotate(current_node);
         }
-        if (flag)  //insert의 경우 balance 한번만 수행함. erase의 경우 재귀적으로 root까지 balance check 필요.
+        if (flag) // insert의 경우 balance 한번만 수행함. erase의 경우 재귀적으로 root까지 balance check 필요.
         {
             return;
         }
@@ -277,7 +278,7 @@ void Int_AVLtree::Balance(Int_AVLtree_Node *current_node, bool flag) // root가 
         {
             LeftRotate(current_node);
         }
-        if (flag)  //insert의 경우 balance 한번만 수행함. erase의 경우 재귀적으로 root까지 balance check 필요.
+        if (flag) // insert의 경우 balance 한번만 수행함. erase의 경우 재귀적으로 root까지 balance check 필요.
         {
             return;
         }
@@ -308,7 +309,7 @@ void Int_AVLtree::RightRotate(Int_AVLtree_Node *node_z) // rightRotate를 실행
     }
     node_y->setParent_node(node_z->getParent_node());
     node_z->setParent_node(node_y);
-    if (T2_root != NULL)  //NULL일 경우 NullPointerError유발위험때문에 체크 후 연결
+    if (T2_root != NULL) // NULL일 경우 NullPointerError유발위험때문에 체크 후 연결
     {
         T2_root->setParent_node(node_z);
     }
@@ -341,7 +342,7 @@ void Int_AVLtree::LeftRotate(Int_AVLtree_Node *node_z) // leftRotate를 실행�
     }
     node_y->setParent_node(node_z->getParent_node());
     node_z->setParent_node(node_y);
-    if (T2_root != NULL)  //NULL일 경우 NullPointerError유발위험때문에 체크 후 연결
+    if (T2_root != NULL) // NULL일 경우 NullPointerError유발위험때문에 체크 후 연결
     {
         T2_root->setParent_node(node_z);
     }
@@ -350,7 +351,7 @@ void Int_AVLtree::LeftRotate(Int_AVLtree_Node *node_z) // leftRotate를 실행�
     return;
 }
 
-void Int_AVLtree::Minimum(int x) // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+std::pair<int, int> Int_AVLtree::Minimum(int x) // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
 {
     Int_AVLtree_Node *minimum_node = Search(getRoot(), x); // x를 key값으로 가지는 노드
     while (minimum_node->getLeft_child() != NULL)          // 노드가 존재할때 까지 실행
@@ -358,10 +359,10 @@ void Int_AVLtree::Minimum(int x) // key값이 x인 노드가 루트인 서브트
         minimum_node = minimum_node->getLeft_child(); // minimum_node를 minimum_node의 왼쪽 자식 노드로 바꿈
     }
     int minimum_node_depth = getDepth(minimum_node); // minimum_node의 depth를 구함
-    std::cout << minimum_node->getKey_() << " " << minimum_node_depth << "\n";
+    return {minimum_node->getKey_(), minimum_node_depth};
 }
 
-void Int_AVLtree::Maximum(int x) // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+std::pair<int, int> Int_AVLtree::Maximum(int x) // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
 {
     Int_AVLtree_Node *root_subtree = Search(getRoot(), x); // x를 key값으로 가지는 노드
     Int_AVLtree_Node *maximum_node = root_subtree;
@@ -370,25 +371,22 @@ void Int_AVLtree::Maximum(int x) // key값이 x인 노드가 루트인 서브트
         maximum_node = maximum_node->getRight_child(); // maximum_node를 minimum_node의 오른쪽 자식 노드로 바꿈
     }
     int maximum_node_depth = getDepth(maximum_node); ////maximum_node의 depth를 구함
-    std::cout << maximum_node->getKey_() << " " << maximum_node_depth << "\n";
+    return {maximum_node->getKey_(), maximum_node_depth};
 }
 
-void Int_AVLtree::Empty() // tree가 비어있는지를 출력하는 함수
+bool Int_AVLtree::Empty() // tree가 비어있는지를 출력하는 함수
 {
     if (getNode_num() == 0) // tree가 비었을때
     {
-        std::cout << 1 << "\n";
-        return;
+        return true;
     }
     else // tree가 비어있지 않을 때
     {
-        std::cout << 0 << "\n";
-        return;
+        return false;
     }
 }
 
-void Int_AVLtree::Size() // tree의 크기를 출력하는 함수
+int Int_AVLtree::Size() // tree의 크기를 출력하는 함수
 {
-    std::cout << getNode_num() << "\n";
-    return;
+    return getNode_num();
 }

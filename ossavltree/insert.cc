@@ -2,10 +2,10 @@
 BSD-3-Clause
 Copyright (c) 2023, Beongchul Yun
 All rights reserved.
- 
+
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
- 
+
 * Redistributions of source code must retain the above copyright
 notice, this list of conditions and the following disclaimer.
 * Redistributions in binary form must reproduce the above copyright
@@ -14,7 +14,7 @@ documentation and/or other materials provided with the distribution.
 * Neither the name of the <organization> nor the
 names of its contributors may be used to endorse or promote products
 derived from this software without specific prior written permission.
- 
+
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #include "set.h"
 
-void Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
+int Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
 {
     AVLtree_Int_node_creator node_creator;
     Int_AVLtree_Node *new_node = (Int_AVLtree_Node *)node_creator.CreateNode(x); // 새로운 노드 생성
@@ -39,8 +39,7 @@ void Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
     {
         setRoot(new_node);
         setNode_num(getNode_num() + 1);
-        std::cout << getDepth(new_node) << "\n";
-        return;
+        return getDepth(new_node);
     }
 
     Int_AVLtree_Node *current_node = getRoot(); // new_node가 삽일될 노드
@@ -62,9 +61,7 @@ void Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
         }
         else if (current_node->getKey_() == x) // x를 key값으로 가지는 노드가 이미 존재할 때
         {
-            std::cout << "이미 존재하는 값입니다./insert"
-                      << "\n";
-            return;
+            return -1;
         }
     }
 
@@ -80,13 +77,11 @@ void Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
     }
     else // 에러가 일어났을 경우
     {
-        std::cout << "잘못된 child_factor 값입니다./insert"
-                  << "\n";
-        return;
+        return -1;
     }
     setNode_num(getNode_num() + 1);
     UpdateLeftSubtreeSize(new_node, 1);
     setHeight(new_node);
     Balance(new_node, true);
-    std::cout << getDepth(new_node) << "\n";
+    return getDepth(new_node);
 }
