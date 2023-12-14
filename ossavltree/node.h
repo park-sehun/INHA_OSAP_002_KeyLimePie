@@ -82,20 +82,14 @@ class Node_creator
 class Int_node_creator : public Node_creator
 {
 public:
-    Int_Node *CreateNode(int x)
-    {
-        return Get_Node(x);
-    }
+    Int_Node *CreateNode(int x);
     virtual Int_Node *Get_Node(int x) = 0;
 };
 
 class AVLtree_Int_node_creator : public Int_node_creator
 {
 public:
-    Int_AVLtree_Node *Get_Node(int x)
-    {
-        return new Int_AVLtree_Node(x);
-    }
+    Int_AVLtree_Node *Get_Node(int x);
 };
 
 #endif
