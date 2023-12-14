@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : 윤병철
 작성일 : 2023년 11월 14일
 */
-#include "set.h"
+#include "data_structure.h"
 
 int Int_AVLtree::Insert(int x) // key값이 x인 노드를 삽입하는 함수
 {

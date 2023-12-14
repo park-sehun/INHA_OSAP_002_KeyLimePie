@@ -29,10 +29,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : 김지환
 작성일 : 2023년 12월 13일
 */
-#ifndef OSSAVLTREE_NODE_H_
-#define OSSAVLTREE_NODE_H_
+#ifndef KEYLIMEPIE_OSSAVLTREE_NODE_H_
+#define KEYLIMEPIE_OSSAVLTREE_NODE_H_
+
 #include <iostream>
-#include <iostream>
+
 class Node
 {
 };

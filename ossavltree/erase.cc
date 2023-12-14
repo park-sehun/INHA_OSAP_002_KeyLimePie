@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성일 : 2023년 11월 26일
 */
 
-#include "set.h"
+#include "data_structure.h"
 
 int Int_AVLtree::Erase(int x)
 { // key값이 x인 노드를 삭제하는 함수

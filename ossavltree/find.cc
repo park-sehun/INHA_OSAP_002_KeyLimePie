@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : 박세훈
 작성일 : 2023년 11월 16일
 */
-#include "set.h"
+#include "data_structure.h"
 
 int Int_AVLtree::Find(int x) // key 값이 x인 노드의 depth를 출력하는 함수
 {

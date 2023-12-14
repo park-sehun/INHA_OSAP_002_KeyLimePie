@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : 김지환
 작성일 : 2023년 11월 19일
 */
-#include "set.h"
+#include "data_structure.h"
 
 std::pair<int, int> Int_AVLtree::Rank(int x)
 { // key값이 x인 노드의 depth와 rank를 출력하는 함수
