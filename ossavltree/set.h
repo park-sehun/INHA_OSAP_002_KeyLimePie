@@ -29,11 +29,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : 김지환
 작성일 : 2023년 12월 13일
 */
-#ifndef OSSAVLTREE_OSSAVLTREE_AVLTREE_H_
-#define OSSAVLTREE_OSSAVLTREE_AVLTREE_H_
+#ifndef KEYLIMEPIE_OSSAVLTREE_SET_H_
+#define KEYLIMEPIE_OSSAVLTREE_SET_H_
+
 #include <iostream>
-#include "node.h"
-#include <data_structure.h>
+
+#include "data_structure.h"
 
 // 데이터 타입에 따라, 그리고 내부 자료 구조형에 따라 기존 클래스 수정없이 확장 가능하도록 구현
 class set
@@ -63,45 +64,15 @@ public:
 class Int_AVLtree_set : public Int_set
 {
 public:
-    Int_AVLtree_set()
-    {
-        AVLtree_Int_ds_creator ds_creator;
-        DataStructure = (Int_AVLtree *)ds_creator.Create_Ds();
-    }
-
-    std::pair<int,int> Minimum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
-    {
-        return DataStructure->Minimum(x);
-    }
-    std::pair<int,int> Maximum(int x) override // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
-    {
-        return DataStructure->Maximum(x);
-    }
-    int Find(int x) override // key 값이 x인 노드의 depth를 출력하는 함수
-    {
-        return DataStructure->Find(x);
-    }
-    int Insert(int x) override // key값이 x인 노드를 삽입하는 함수
-    {
-        return DataStructure->Insert(x);
-    }
-    std::pair<int,int> Rank(int x) override // key값이 x인 노드의 depth와 rank를 출력하는 함수
-    {
-        return DataStructure->Rank(x);
-    }
-    int Erase(int x) override // key값이 x인 노드를 삭제하는 함수
-    {
-        return DataStructure->Erase(x);
-    }
-    bool Empty() override // tree가 비어있는지를 출력하는 함수
-    {
-        return DataStructure->Empty();
-    }
-    int Size() override // tree의 크기를 출력하는 함수
-    {
-        return DataStructure->Size();
-    }
-
+    Int_AVLtree_set();
+    std::pair<int,int> Minimum(int x) override; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+    std::pair<int,int> Maximum(int x) override; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+    int Find(int x) override; // key 값이 x인 노드의 depth를 출력하는 함수
+    int Insert(int x) override; // key값이 x인 노드를 삽입하는 함수
+    std::pair<int,int> Rank(int x) override; // key값이 x인 노드의 depth와 rank를 출력하는 함수
+    int Erase(int x) override; // key값이 x인 노드를 삭제하는 함수
+    bool Empty() override; // tree가 비어있는지를 출력하는 함수
+    int Size() override; // tree의 크기를 출력하는 함수
 private:
     Int_AVLtree *DataStructure;
 };

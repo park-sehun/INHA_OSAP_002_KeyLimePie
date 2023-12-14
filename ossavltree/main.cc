@@ -29,14 +29,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 작성자 : 김지환
 작성일 : 2023년 12월 13일
 */
-#include <iostream>
 #include "set.h"
 
 int main()
 {
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
-    std::cout.tie(NULL);
     int t;
     std::cin >> t;
     while (t--)
