@@ -1,0 +1,113 @@
+        -:    0:Source:/home/jihwan/KeyLimePie/ossavltree/erase.cc
+        -:    0:Graph:erase.cc.gcno
+        -:    0:Data:erase.cc.gcda
+        -:    0:Runs:3
+        -:    1:/*
+        -:    2:BSD-3-Clause
+        -:    3:Copyright (c) 2023, Huiju Lee
+        -:    4:All rights reserved.
+        -:    5:
+        -:    6:Redistribution and use in source and binary forms, with or without
+        -:    7:modification, are permitted provided that the following conditions are met:
+        -:    8:
+        -:    9:* Redistributions of source code must retain the above copyright
+        -:   10:notice, this list of conditions and the following disclaimer.
+        -:   11:* Redistributions in binary form must reproduce the above copyright
+        -:   12:notice, this list of conditions and the following disclaimer in the
+        -:   13:documentation and/or other materials provided with the distribution.
+        -:   14:* Neither the name of the <organization> nor the
+        -:   15:names of its contributors may be used to endorse or promote products
+        -:   16:derived from this software without specific prior written permission.
+        -:   17:
+        -:   18:THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+        -:   19:ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+        -:   20:WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        -:   21:DISCLAIMED. IN NO EVENT SHALL Huiju Lee BE LIABLE FOR ANY
+        -:   22:DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+        -:   23:(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+        -:   24:LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+        -:   25:ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        -:   26:(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        -:   27:SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        -:   28:
+        -:   29:작성자 : 이희주
+        -:   30:작성일 : 2023년 11월 26일
+        -:   31:*/
+        -:   32:
+        -:   33:#include "data_structure.h"
+        -:   34:
+      120:   35:int Int_AVLtree::Erase(int x)
+        -:   36:{ // key값이 x인 노드를 삭제하는 함수
+      120:   37:    Int_AVLtree_Node *delete_node = Search(getRoot(), x);
+        -:   38:
+      120:   39:    if (delete_node == NULL)
+        -:   40:    {
+        3:   41:        return 0;
+        -:   42:    }
+        -:   43:
+      117:   44:    int depth = getDepth(delete_node);
+        -:   45:
+      117:   46:    Int_AVLtree_Node *parent_node_of_del = delete_node->getParent_node();
+        -:   47:    Int_AVLtree_Node *child_node;
+        -:   48:
+      117:   49:    if (delete_node->getLeft_child() == NULL && delete_node->getRight_child() == NULL)
+        -:   50:    { // del_node의 자식 노드가 존재하지 않음
+       66:   51:        child_node = NULL;
+        -:   52:    }
+       51:   53:    else if (delete_node->getLeft_child() == NULL && delete_node->getRight_child() != NULL)
+        -:   54:    { // del_node가 오른쪽 자식 노드만 가짐
+        9:   55:        child_node = delete_node->getRight_child();
+        -:   56:    }
+       42:   57:    else if (delete_node->getLeft_child() != NULL && delete_node->getRight_child() == NULL)
+        -:   58:    { // delete_node가 왼쪽 자식 노드만 가짐
+        3:   59:        child_node = delete_node->getLeft_child();
+        -:   60:    }
+        -:   61:    else
+        -:   62:    { // delete_node가 자식 노드 두 개를 모두 가짐
+       39:   63:        child_node = delete_node->getRight_child();
+        -:   64:
+       90:   65:        while (child_node->getLeft_child() != NULL)
+        -:   66:        {
+       51:   67:            child_node = child_node->getLeft_child();
+        -:   68:        }
+        -:   69:
+       39:   70:        delete_node->setKey_(child_node->getKey_());
+       39:   71:        delete_node = child_node;
+       39:   72:        parent_node_of_del = delete_node->getParent_node();
+       39:   73:        child_node = delete_node->getRight_child();
+        -:   74:    }
+        -:   75:
+      117:   76:    UpdateLeftSubtreeSize(delete_node, -1);
+        -:   77:
+      117:   78:    if (parent_node_of_del == NULL)
+        -:   79:    { // root를 삭제
+        6:   80:        setRoot(child_node);
+        6:   81:        if (child_node != NULL)
+        -:   82:        {
+    #####:   83:            getRoot()->setParent_node(NULL);
+        -:   84:        }
+        -:   85:    }
+      111:   86:    else if (delete_node == parent_node_of_del->getLeft_child())
+        -:   87:    { // 삭제할 노드가 부모의 왼쪽 자식
+       66:   88:        parent_node_of_del->setLeft_child(child_node);
+       66:   89:        if (child_node != NULL)
+        -:   90:        {
+       15:   91:            child_node->setParent_node(parent_node_of_del);
+        -:   92:        }
+        -:   93:    }
+        -:   94:    else
+        -:   95:    { // 삭제할 노드가 부모의 오른쪽 자식
+       45:   96:        parent_node_of_del->setRight_child(child_node);
+       45:   97:        if (child_node != NULL)
+        -:   98:        {
+        6:   99:            child_node->setParent_node(parent_node_of_del);
+        -:  100:        }
+        -:  101:    }
+      117:  102:    Int_AVLtree_Node *tmp_parent = delete_node->getParent_node();
+      117:  103:    setHeight(tmp_parent);
+      117:  104:    delete delete_node;
+      117:  105:    setNode_num(getNode_num() - 1);
+      117:  106:    Balance(tmp_parent, false);
+        -:  107:
+      117:  108:    return depth; // depth를 출력해야 함
+        -:  109:}

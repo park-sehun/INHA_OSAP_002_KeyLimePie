@@ -1,0 +1,332 @@
+        -:    0:Source:/home/jihwan/KeyLimePie/ossavltree/data_structure.cc
+        -:    0:Graph:data_structure.cc.gcno
+        -:    0:Data:data_structure.cc.gcda
+        -:    0:Runs:3
+        -:    1:/*
+        -:    2:BSD-3-Clause
+        -:    3:Copyright (c) 2023, KeyLimePie team
+        -:    4:All rights reserved.
+        -:    5:
+        -:    6:Redistribution and use in source and binary forms, with or without
+        -:    7:modification, are permitted provided that the following conditions are met:
+        -:    8:
+        -:    9:* Redistributions of source code must retain the above copyright
+        -:   10:notice, this list of conditions and the following disclaimer.
+        -:   11:* Redistributions in binary form must reproduce the above copyright
+        -:   12:notice, this list of conditions and the following disclaimer in the
+        -:   13:documentation and/or other materials provided with the distribution.
+        -:   14:* Neither the name of the <organization> nor the
+        -:   15:names of its contributors may be used to endorse or promote products
+        -:   16:derived from this software without specific prior written permission.
+        -:   17:
+        -:   18:THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+        -:   19:ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+        -:   20:WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        -:   21:DISCLAIMED. IN NO EVENT SHALL KeyLimePie team BE LIABLE FOR ANY
+        -:   22:DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+        -:   23:(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+        -:   24:LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+        -:   25:ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        -:   26:(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        -:   27:SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        -:   28:
+        -:   29:작성자 : KeyLimePie team
+        -:   30:작성일 : 2023년 12월 13일
+        -:   31:*/
+        -:   32:#include "data_structure.h"
+        -:   33:
+      531:   34:Int_AVLtree::Int_AVLtree() : root(NULL), node_num(0) {} // 생성자 함수
+        -:   35:
+    78021:   36:int Int_AVLtree::getBalanceFactor(Int_AVLtree_Node *current_node) // balanceFactor를 구하는 함수
+        -:   37:{
+    78021:   38:    if (current_node == NULL) // 입력된 노드가 존재하지 않을 경우
+        -:   39:    {
+    #####:   40:        return 0;
+        -:   41:    }
+    78021:   42:    int left_height = 0, right_height = 0;
+    78021:   43:    if (current_node->getLeft_child() != NULL) // 좌측 자식이없을 경우 좌측 height는 0
+        -:   44:    {
+    27246:   45:        left_height = current_node->getLeft_child()->getHeight() + 1;
+        -:   46:    }
+    78021:   47:    if (current_node->getRight_child() != NULL) // 우측 자식이 없을 경우 우측 height는 0
+        -:   48:    {
+    60681:   49:        right_height = current_node->getRight_child()->getHeight() + 1;
+        -:   50:    }
+    78021:   51:    int balance_factor = left_height - right_height;
+    78021:   52:    return balance_factor;
+        -:   53:}
+        -:   54:
+    18303:   55:int Int_AVLtree::getDepth(Int_AVLtree_Node *current_node) // depth를 구하는 함수
+        -:   56:{
+    18303:   57:    if (current_node == NULL)
+        -:   58:    {
+        3:   59:        return 0;
+        -:   60:    }
+        -:   61:
+    18300:   62:    int depth = 0;
+    81744:   63:    while (current_node != getRoot()) // current_node가 root 노드면 탈출
+        -:   64:    {
+    63444:   65:        current_node = current_node->getParent_node();
+    63444:   66:        depth++;
+        -:   67:    }
+        -:   68:
+    18300:   69:    return depth;
+        -:   70:}
+        -:   71:
+      540:   72:int Int_AVLtree::getRank(Int_AVLtree_Node *current_node, int x)
+        -:   73:{                                     // key값이 x보다 작은 노드의 개수를 재귀적으로 구하는 함수
+      540:   74:    if (x == current_node->getKey_()) // 현재 노드의 key가 x일 경우 해당 노드의 left_subtree_size값 리턴
+        -:   75:    {
+      126:   76:        return current_node->getLeft_subtree_size();
+        -:   77:    }
+      414:   78:    else if (x < current_node->getKey_()) // x값이 현재 노드의 key값보다 작을 경우
+        -:   79:    {
+      189:   80:        if (current_node->getLeft_child() == NULL) // 왼쪽 자식이 존재하지 않을 경우 해당 노드가 없다는 뜻이므로 탐색 실패
+        -:   81:        {
+    #####:   82:            return -1;
+        -:   83:        }
+        -:   84:        else // 왼쪽 자식이 존재 할 경우 그곳으로 이동
+      189:   85:            return getRank(current_node->getLeft_child(), x);
+        -:   86:    }
+        -:   87:    else // x값이 현재 노드의 key값보다 클 경우
+        -:   88:    {
+      225:   89:        if (current_node->getRight_child() == NULL) // 오른쪽 자식이 존재하지 않을 경우 해당 노드가 없다는 뜻이므로 탐색 실패
+        -:   90:        {
+    #####:   91:            return -1;
+        -:   92:        }
+        -:   93:        else // 오른쪽 자식이 존재하는 경우
+        -:   94:        {
+      225:   95:            int right_subtree_size = getRank(current_node->getRight_child(), x); // right_size를 재귀적으로 구해옴.
+      225:   96:            if (right_subtree_size == -1)                                        // x값을 가진 노드 탐색 실패 할 경우
+    #####:   97:                return -1;
+        -:   98:            else                                                                      //
+      225:   99:                return current_node->getLeft_subtree_size() + 1 + right_subtree_size; // 현재노드의 key값이 x보다 작으므로 현재노드의 왼쪽 서브트리 사이즈 + 1 + right size 리턴
+        -:  100:        }
+        -:  101:    }
+        -:  102:}
+        -:  103:
+    93687:  104:void Int_AVLtree::UpdateLeftSubtreeSize(Int_AVLtree_Node *current_node, int flag)
+        -:  105:{                                                       // insert 직후, rotation전에 left_subtree_size를 업데이트 하는 함수
+    93687:  106:    if (current_node == getRoot() || getRoot() == NULL) // 루트,NULL 도달 시 종료
+        -:  107:    {
+    17286:  108:        return;
+        -:  109:    }
+        -:  110:    else
+        -:  111:    {
+    76401:  112:        if (current_node == current_node->getParent_node()->getLeft_child()) // current_node가 부모의 왼쪽 자식일 경우 부모의 left_subtree_size 1 증가
+        -:  113:        {
+      336:  114:            current_node->getParent_node()->setLeft_subtree_size(current_node->getParent_node()->getLeft_subtree_size() + flag);
+        -:  115:        }
+    76401:  116:        return UpdateLeftSubtreeSize(current_node->getParent_node(), flag); // 재귀적으로 루트까지 업데이트
+        -:  117:    }
+        -:  118:}
+        -:  119:
+      618:  120:Int_AVLtree_Node *Int_AVLtree::Search(Int_AVLtree_Node *current_node, int x) // root가 current_node인 서브트리에서 key값이 x인 노드를 찾는 함수
+        -:  121:{
+     2529:  122:    while (current_node != NULL)
+        -:  123:    {
+     2523:  124:        if (x == current_node->getKey_())
+        -:  125:        {
+      612:  126:            return current_node;
+        -:  127:        } // key값이 x인 노드 발견 성공시 해당 노드 포인터 리턴
+     1911:  128:        else if (x < current_node->getKey_())
+        -:  129:        { // x값이 현재 노드의 key값보다 작을 경우 현재노드의 left_child로 이동
+      876:  130:            current_node = current_node->getLeft_child();
+        -:  131:        }
+        -:  132:        else
+        -:  133:        { // x값이 현재 노드의 key값보다 클 경우 현재 노드의 right_child로 이동
+     1035:  134:            current_node = current_node->getRight_child();
+        -:  135:        }
+        -:  136:    }
+        6:  137:    return NULL; // key가 x인 노드를 찾지 못하고 leaf 노드에 도달 한 경우 x값을 가진 노드가 없다는 뜻이므로 NULL리턴
+        -:  138:}
+        -:  139:
+   185484:  140:void Int_AVLtree::setHeight(Int_AVLtree_Node *current_node) // 노드의 height 변수를 세팅해주는 함수
+        -:  141:{
+   185484:  142:    if (current_node == NULL) // 부모 노드의 parent 혹은 Null에 도달했을 경우 재귀 종료
+        -:  143:    {
+    32037:  144:        return;
+        -:  145:    }
+   153447:  146:    if (current_node->getLeft_child() == NULL && current_node->getRight_child() == NULL)
+        -:  147:    { // 리프노드의 height는 0
+    25509:  148:        current_node->setHeight(0);
+        -:  149:    }
+        -:  150:    else
+        -:  151:    { // 좌,우 자식의 height중 더 높은것 +1이 자신의 height가 됨.
+   127938:  152:        int left_height = -1, right_height = -1;
+   127938:  153:        if (current_node->getLeft_child() != NULL) // 왼쪽자식의 height 불러오기
+        -:  154:        {
+   102597:  155:            left_height = current_node->getLeft_child()->getHeight();
+        -:  156:        }
+   127938:  157:        if (current_node->getRight_child() != NULL) // 오른쪽 자식의 height 불러오기
+        -:  158:        {
+   127779:  159:            right_height = current_node->getRight_child()->getHeight();
+        -:  160:        }
+   127938:  161:        current_node->setHeight(std::max(left_height, right_height) + 1);
+        -:  162:    }
+   153447:  163:    return setHeight(current_node->getParent_node()); // 재귀호출을 통해 추가된 리프노드부터 부모까지 height 업데이트
+        -:  164:}
+        -:  165:
+    65880:  166:void Int_AVLtree::Balance(Int_AVLtree_Node *current_node, bool flag) // root가 currnt_node인 서브트리에서 균형을 맞추는 함수 , flag가 true면 insert ,false면 delete
+        -:  167:{
+    65880:  168:    if (current_node == NULL) // currenr_node가 없는 경우
+        -:  169:    {
+     2583:  170:        return;
+        -:  171:    }
+    63297:  172:    int current_node_balance_factor = getBalanceFactor(current_node); // currnet_node의 balance factor
+        -:  173:
+    63297:  174:    if (current_node_balance_factor <= 1 && current_node_balance_factor >= -1) // 높이차가 1이하인 경우(balancefactor가 -1에서 1사이인 경우)
+        -:  175:    {
+    48573:  176:        return Balance(current_node->getParent_node(), flag);
+        -:  177:    }
+    14724:  178:    else if (current_node_balance_factor >= 1) // 왼쪽 자식 노드의 높이가 2이상으로 더 높은 경우
+        -:  179:    {
+       15:  180:        if (getBalanceFactor(current_node->getLeft_child()) >= 0) // LL 변환
+        -:  181:        {
+        3:  182:            RightRotate(current_node);
+        -:  183:        }
+        -:  184:        else // LR 변환
+        -:  185:        {
+       12:  186:            LeftRotate(current_node->getLeft_child());
+       12:  187:            RightRotate(current_node);
+        -:  188:        }
+       15:  189:        if (flag) // insert의 경우 balance 한번만 수행함. erase의 경우 재귀적으로 root까지 balance check 필요.
+        -:  190:        {
+        6:  191:            return;
+        -:  192:        }
+        -:  193:    }
+    14709:  194:    else if (current_node_balance_factor <= -1) // 오른쪽 자식 노드의 높이가 2이상으로 더 높은 경우
+        -:  195:    {
+    14709:  196:        if (getBalanceFactor(current_node->getRight_child()) > 0) // RL 변환
+        -:  197:        {
+       15:  198:            RightRotate(current_node->getRight_child());
+       15:  199:            LeftRotate(current_node);
+        -:  200:        }
+        -:  201:        else // RR 변환
+        -:  202:        {
+    14694:  203:            LeftRotate(current_node);
+        -:  204:        }
+    14709:  205:        if (flag) // insert의 경우 balance 한번만 수행함. erase의 경우 재귀적으로 root까지 balance check 필요.
+        -:  206:        {
+    14697:  207:            return;
+        -:  208:        }
+        -:  209:    }
+       21:  210:    return Balance(current_node->getParent_node(), flag);
+        -:  211:}
+        -:  212:
+       30:  213:void Int_AVLtree::RightRotate(Int_AVLtree_Node *node_z) // rightRotate를 실행하는 함수
+        -:  214:{
+       30:  215:    Int_AVLtree_Node *node_y = node_z->getLeft_child();
+       30:  216:    Int_AVLtree_Node *T2_root = node_y->getRight_child();
+        -:  217:
+       30:  218:    node_y->setRight_child(node_z);
+       30:  219:    node_z->setLeft_child(T2_root);
+        -:  220:
+       30:  221:    if (node_z->getParent_node() == NULL) // node_z가 루트노드였을 경우
+        -:  222:    {
+        9:  223:        setRoot(node_y); // node_y를 루트노트로 설정
+        9:  224:        node_y->setParent_node(NULL);
+        -:  225:    }
+       21:  226:    else if (node_z->getParent_node()->getLeft_child() == node_z) // node_z가 부모노드의 왼쪽 자식 노드였을 경우
+        -:  227:    {
+        6:  228:        node_z->getParent_node()->setLeft_child(node_y);
+        -:  229:    }
+        -:  230:    else // node_z가 부모노드의 오른쪽 자식 노드였을 경우
+        -:  231:    {
+       15:  232:        node_z->getParent_node()->setRight_child(node_y);
+        -:  233:    }
+       30:  234:    node_y->setParent_node(node_z->getParent_node());
+       30:  235:    node_z->setParent_node(node_y);
+       30:  236:    if (T2_root != NULL) // NULL일 경우 NullPointerError유발위험때문에 체크 후 연결
+        -:  237:    {
+    #####:  238:        T2_root->setParent_node(node_z);
+        -:  239:    }
+        -:  240:
+       30:  241:    node_z->setLeft_subtree_size(node_z->getLeft_subtree_size() - (node_y->getLeft_subtree_size() + 1)); // node_z의 왼쪽 서브트리의 사이즈 변화
+       30:  242:    setHeight(node_z);
+       30:  243:    return;
+        -:  244:}
+        -:  245:
+    14721:  246:void Int_AVLtree::LeftRotate(Int_AVLtree_Node *node_z) // leftRotate를 실행하는 함수
+        -:  247:{
+    14721:  248:    Int_AVLtree_Node *node_y = node_z->getRight_child();
+    14721:  249:    Int_AVLtree_Node *T2_root = node_y->getLeft_child();
+        -:  250:
+    14721:  251:    node_y->setLeft_child(node_z);
+    14721:  252:    node_z->setRight_child(T2_root);
+        -:  253:
+    14721:  254:    if (node_z->getParent_node() == NULL) // node_z가 루트노드였을 경우
+        -:  255:    {
+     1848:  256:        setRoot(node_y); // node_y를 루트노트로 설정
+     1848:  257:        node_y->setParent_node(NULL);
+        -:  258:    }
+    12873:  259:    else if (node_z->getParent_node()->getLeft_child() == node_z) // node_z가 부모노드의 왼쪽 자식 노드였을 경우
+        -:  260:    {
+       18:  261:        node_z->getParent_node()->setLeft_child(node_y);
+        -:  262:    }
+        -:  263:    else // node_z가 부모노드의 왼쪽 자식 노드였을 경우
+        -:  264:    {
+    12855:  265:        node_z->getParent_node()->setRight_child(node_y);
+        -:  266:    }
+    14721:  267:    node_y->setParent_node(node_z->getParent_node());
+    14721:  268:    node_z->setParent_node(node_y);
+    14721:  269:    if (T2_root != NULL) // NULL일 경우 NullPointerError유발위험때문에 체크 후 연결
+        -:  270:    {
+     6429:  271:        T2_root->setParent_node(node_z);
+        -:  272:    }
+    14721:  273:    node_y->setLeft_subtree_size(node_y->getLeft_subtree_size() + node_z->getLeft_subtree_size() + 1); // node_y의 왼쪽 서브트리의 사이즈 변화
+    14721:  274:    setHeight(node_z);
+    14721:  275:    return;
+        -:  276:}
+        -:  277:
+      117:  278:std::pair<int, int> Int_AVLtree::Minimum(int x) // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+        -:  279:{
+      117:  280:    Int_AVLtree_Node *minimum_node = Search(getRoot(), x); // x를 key값으로 가지는 노드
+      213:  281:    while (minimum_node->getLeft_child() != NULL)          // 노드가 존재할때 까지 실행
+        -:  282:    {
+       96:  283:        minimum_node = minimum_node->getLeft_child(); // minimum_node를 minimum_node의 왼쪽 자식 노드로 바꿈
+        -:  284:    }
+      117:  285:    int minimum_node_depth = getDepth(minimum_node); // minimum_node의 depth를 구함
+        -:  286:
+      117:  287:    return std::make_pair(minimum_node->getKey_(), minimum_node_depth);
+        -:  288:}
+        -:  289:
+      123:  290:std::pair<int, int> Int_AVLtree::Maximum(int x) // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+        -:  291:{
+      123:  292:    Int_AVLtree_Node *root_subtree = Search(getRoot(), x); // x를 key값으로 가지는 노드
+      123:  293:    Int_AVLtree_Node *maximum_node = root_subtree;
+      228:  294:    while (maximum_node->getRight_child() != NULL) // 노드가 존재할때 까지 실행
+        -:  295:    {
+      105:  296:        maximum_node = maximum_node->getRight_child(); // maximum_node를 minimum_node의 오른쪽 자식 노드로 바꿈
+        -:  297:    }
+      123:  298:    int maximum_node_depth = getDepth(maximum_node); ////maximum_node의 depth를 구함
+        -:  299:    
+      123:  300:    return std::make_pair(maximum_node->getKey_(), maximum_node_depth);
+        -:  301:}
+        -:  302:
+        6:  303:bool Int_AVLtree::Empty() // tree가 비어있는지를 출력하는 함수
+        -:  304:{
+        6:  305:    if (getNode_num() == 0) // tree가 비었을때
+        -:  306:    {
+        3:  307:        return true;
+        -:  308:    }
+        -:  309:    else // tree가 비어있지 않을 때
+        -:  310:    {
+        3:  311:        return false;
+        -:  312:    }
+        -:  313:}
+        -:  314:
+       12:  315:int Int_AVLtree::Size() // tree의 크기를 출력하는 함수
+        -:  316:{
+       12:  317:    return getNode_num();
+        -:  318:}
+        -:  319:
+      531:  320: Ds *ds_creator::Create_Ds()
+        -:  321:    {
+      531:  322:        return Get_Ds();
+        -:  323:    }
+        -:  324:
+      531:  325: Int_AVLtree *AVLtree_Int_ds_creator::Get_Ds()
+        -:  326:    {
+      531:  327:        return new Int_AVLtree();
+        -:  328:    }

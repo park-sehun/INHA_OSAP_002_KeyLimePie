@@ -1,0 +1,3 @@
+/home/jihwan/KeyLimePie/ossavltree/build/CMakeFiles/KeyLimePieTest.dir
+/home/jihwan/KeyLimePie/ossavltree/build/CMakeFiles/edit_cache.dir
+/home/jihwan/KeyLimePie/ossavltree/build/CMakeFiles/rebuild_cache.dir

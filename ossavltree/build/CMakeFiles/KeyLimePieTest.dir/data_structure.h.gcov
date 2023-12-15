@@ -1,0 +1,111 @@
+        -:    0:Source:/home/jihwan/KeyLimePie/ossavltree/data_structure.h
+        -:    0:Graph:rank.cc.gcno
+        -:    0:Data:rank.cc.gcda
+        -:    0:Runs:3
+        -:    1:/*
+        -:    2:BSD-3-Clause
+        -:    3:Copyright (c) 2023, KeyLimePie team
+        -:    4:All rights reserved.
+        -:    5:
+        -:    6:Redistribution and use in source and binary forms, with or without
+        -:    7:modification, are permitted provided that the following conditions are met:
+        -:    8:
+        -:    9:* Redistributions of source code must retain the above copyright
+        -:   10:notice, this list of conditions and the following disclaimer.
+        -:   11:* Redistributions in binary form must reproduce the above copyright
+        -:   12:notice, this list of conditions and the following disclaimer in the
+        -:   13:documentation and/or other materials provided with the distribution.
+        -:   14:* Neither the name of the <organization> nor the
+        -:   15:names of its contributors may be used to endorse or promote products
+        -:   16:derived from this software without specific prior written permission.
+        -:   17:
+        -:   18:THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+        -:   19:ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+        -:   20:WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        -:   21:DISCLAIMED. IN NO EVENT SHALL KeyLimePie team BE LIABLE FOR ANY
+        -:   22:DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+        -:   23:(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+        -:   24:LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+        -:   25:ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        -:   26:(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        -:   27:SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        -:   28:
+        -:   29:작성자 : KeyLimePie team
+        -:   30:작성일 : 2023년 12월 13일
+        -:   31:*/
+        -:   32:#ifndef KEYLIMEPIE_OSSAVLTREE_DATA_STRUCTURE_H_
+        -:   33:#define KEYLIMEPIE_OSSAVLTREE_DATA_STRUCTURE_H_
+        -:   34:
+        -:   35:#include <iostream>
+        -:   36:#include "node.h"
+        -:   37:
+        -:   38:class Ds
+        -:   39:{
+        -:   40:public:
+        -:   41:};
+        -:   42:
+        -:   43:class Int_ds : public Ds
+        -:   44:{
+        -:   45:public:
+        -:   46:    virtual std::pair<int, int> Minimum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+        -:   47:    virtual std::pair<int, int> Maximum(int x) = 0; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+        -:   48:    virtual int Find(int x) = 0;                    // key 값이 x인 노드의 depth를 출력하는 함수
+        -:   49:    virtual int Insert(int x) = 0;                  // key값이 x인 노드를 삽입하는 함수
+        -:   50:    virtual std::pair<int, int> Rank(int x) = 0;    // key값이 x인 노드의 depth와 rank를 출력하는 함수
+        -:   51:    virtual int Erase(int x) = 0;                   // key값이 x인 노드를 삭제하는 함수
+        -:   52:    virtual bool Empty() = 0;                       // tree가 비어있는지를 출력하는 함수
+        -:   53:    virtual int Size() = 0;                         // tree의 크기를 출력하는 함수
+        -:   54:};
+        -:   55:
+        -:   56:class Int_AVLtree : public Int_ds
+        -:   57:{
+        -:   58:public:
+        -:   59:    Int_AVLtree();                                           // 생성자 함수
+        -:   60:    int getBalanceFactor(Int_AVLtree_Node *current_node);    // balanceFactor를 구하는 함수
+        -:   61:    int getDepth(Int_AVLtree_Node *current_node);            // depth를 구하는 함수
+        -:   62:    void Balance(Int_AVLtree_Node *current_node, bool flag); // root가 currnt_node인 서브트리에서 균형을 맞추는 함수
+        -:   63:    void RightRotate(Int_AVLtree_Node *node_z);              // rightRotate를 실행하는 함수
+        -:   64:    void LeftRotate(Int_AVLtree_Node *node_z);               // leftRotate를 실행하는 함수
+        -:   65:    void setHeight(Int_AVLtree_Node *current_node);
+        -:   66:    int getRank(Int_AVLtree_Node *current_node, int x);                   // key값이 x보다 작은 노드의 개수를 재귀적으로 구하는 함수
+        -:   67:    void UpdateLeftSubtreeSize(Int_AVLtree_Node *current_node, int flag); // insert 직후 left_subtree_size를 업데이트 하는 함수
+        -:   68:    Int_AVLtree_Node *Search(Int_AVLtree_Node *current_node, int x);      // root가 currnt_node인 서브트리에서 key값이 x인 노드를 찾는 함수
+    #####:   69:    Int_AVLtree_Node *getRoot() { return root; }
+        -:   70:    void setRoot(Int_AVLtree_Node *n) { root = n; }
+        -:   71:    int getNode_num() { return node_num; }
+        -:   72:    void setNode_num(int x) { node_num = x; }
+        -:   73:
+        -:   74:    std::pair<int, int> Minimum(int x) override; // key값이 x인 노드가 루트인 서브트리에서의 최소 key를 가지는 노드의 key와 depth를 출력하는 함수
+        -:   75:    std::pair<int, int> Maximum(int x) override; // key값이 x인 노드가 루트인 서브트리에서의 최대 key를 가지는 노드의 key와 depth를 출력하는 함수
+        -:   76:    int Find(int x) override;                    // key 값이 x인 노드의 depth를 출력하는 함수
+        -:   77:    int Insert(int x) override;                  // key값이 x인 노드를 삽입하는 함수
+        -:   78:    std::pair<int, int> Rank(int x) override;    // key값이 x인 노드의 depth와 rank를 출력하는 함수
+        -:   79:    int Erase(int x) override;                   // key값이 x인 노드를 삭제하는 함수
+        -:   80:    bool Empty() override;                       // tree가 비어있는지를 출력하는 함수
+        -:   81:    int Size() override;                         // tree의 크기를 출력하는 함수
+        -:   82:private:
+        -:   83:    Int_AVLtree_Node *root; // tree의 루트 노드
+        -:   84:    int node_num;           // tree의 저장된 노드의 숫자
+        -:   85:};
+        -:   86:
+        -:   87:// 팩토리 메서드 적용, 단일 책임원칙을 위해 객체 생성역할 분리, 팩토리 메서드에 위임
+        -:   88:class ds_creator
+        -:   89:{
+        -:   90:public:
+        -:   91:    Ds *Create_Ds();
+        -:   92:    virtual Ds *Get_Ds() = 0;
+        -:   93:};
+        -:   94:
+        -:   95:class Int_ds_creator : public ds_creator
+        -:   96:{
+        -:   97:public:
+        -:   98:    virtual Int_ds *Get_Ds() override = 0;
+        -:   99:};
+        -:  100:
+        -:  101:class AVLtree_Int_ds_creator : public Int_ds_creator
+        -:  102:{
+        -:  103:public:
+        -:  104:    Int_AVLtree *Get_Ds();
+        -:  105:};
+        -:  106:
+        -:  107:#endif
