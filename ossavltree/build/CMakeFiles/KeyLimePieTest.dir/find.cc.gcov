@@ -1,0 +1,43 @@
+        -:    0:Source:/home/jihwan/KeyLimePie/ossavltree/find.cc
+        -:    0:Graph:find.cc.gcno
+        -:    0:Data:find.cc.gcda
+        -:    0:Runs:3
+        -:    1:/*
+        -:    2:BSD-3-Clause
+        -:    3:Copyright (c) 2023, Sehun Park
+        -:    4:All rights reserved.
+        -:    5:
+        -:    6:Redistribution and use in source and binary forms, with or without
+        -:    7:modification, are permitted provided that the following conditions are met:
+        -:    8:
+        -:    9:* Redistributions of source code must retain the above copyright
+        -:   10:notice, this list of conditions and the following disclaimer.
+        -:   11:* Redistributions in binary form must reproduce the above copyright
+        -:   12:notice, this list of conditions and the following disclaimer in the
+        -:   13:documentation and/or other materials provided with the distribution.
+        -:   14:* Neither the name of the <organization> nor the
+        -:   15:names of its contributors may be used to endorse or promote products
+        -:   16:derived from this software without specific prior written permission.
+        -:   17:
+        -:   18:THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+        -:   19:ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+        -:   20:WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        -:   21:DISCLAIMED. IN NO EVENT SHALL Sehun Park BE LIABLE FOR ANY
+        -:   22:DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+        -:   23:(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+        -:   24:LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+        -:   25:ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        -:   26:(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        -:   27:SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        -:   28:
+        -:   29:작성자 : 박세훈
+        -:   30:작성일 : 2023년 11월 16일
+        -:   31:*/
+        -:   32:#include "data_structure.h"
+        -:   33:
+      132:   34:int Int_AVLtree::Find(int x) // key 값이 x인 노드의 depth를 출력하는 함수
+        -:   35:{
+      132:   36:    Int_AVLtree_Node *result = Search(getRoot(), x); // key 값이 x인 노드 search
+      132:   37:    int depth = getDepth(result);                    // Get the depth of the found node
+      132:   38:    return depth;
+        -:   39:}

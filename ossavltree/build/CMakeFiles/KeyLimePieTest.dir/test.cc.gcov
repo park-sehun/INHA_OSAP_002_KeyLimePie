@@ -1,0 +1,1392 @@
+        -:    0:Source:/home/jihwan/KeyLimePie/ossavltree/test.cc
+        -:    0:Graph:test.cc.gcno
+        -:    0:Data:test.cc.gcda
+        -:    0:Runs:3
+        -:    1:#include "set.h"
+        -:    2:#include <gtest/gtest.h>
+        -:    3:#include <stdexcept>
+        -:    4:
+        -:    5:class SetTestFixture : public testing::Test {
+        -:    6:public:
+        -:    7:	SetTestFixture();
+        -:    8:	virtual ~SetTestFixture();
+        -:    9:	void SetUp() override;
+        -:   10:	void TearDown() override;
+        -:   11:	static void SetUpTestCase();
+        -:   12:	static void TearDownTestCase();
+        -:   13:
+        -:   14:protected:
+        -:   15:	Int_AVLtree_set set;
+        -:   16:};
+        -:   17:
+       24:   18:SetTestFixture::SetTestFixture() {
+       24:   19:	std::cout << "Constructor called\n";
+       24:   20:}
+        -:   21:
+      24*:   22:SetTestFixture::~SetTestFixture() {
+       24:   23:	std::cout << "Destructor called\n";
+      24*:   24:}
+------------------
+_ZN14SetTestFixtureD0Ev:
+    #####:   22:SetTestFixture::~SetTestFixture() {
+        -:   23:	std::cout << "Destructor called\n";
+    #####:   24:}
+------------------
+_ZN14SetTestFixtureD2Ev:
+       24:   22:SetTestFixture::~SetTestFixture() {
+       24:   23:	std::cout << "Destructor called\n";
+       24:   24:}
+------------------
+        -:   25:
+        3:   26:void SetTestFixture::SetUpTestCase() {
+        3:   27:	std::cout << "SetUPTestCase called\n";
+        3:   28:}
+        -:   29:
+        3:   30:void SetTestFixture::TearDownTestCase() {
+        3:   31:	std::cout << "TearDownTestCase called\n";
+        3:   32:}
+        -:   33:
+       24:   34:void SetTestFixture::SetUp() {
+       24:   35:	std::cout << "SetUp called\n";
+       24:   36:	set.Insert(10);
+       24:   37:	set.Insert(5);
+       24:   38:	set.Insert(15);
+       24:   39:	set.Insert(2);
+       24:   40:	set.Insert(7);
+       24:   41:	set.Insert(12);
+       24:   42:	set.Insert(17);
+       24:   43:}
+        -:   44:
+       24:   45:void SetTestFixture::TearDown() {
+       24:   46:	std::cout << "TearDown called\n";
+       24:   47:}
+        -:   48:
+        -:   49:class LXRotateInsertFixture : public testing::TestWithParam<std::tuple<int, int>> {
+        -:   50:public:
+        -:   51:protected:
+        -:   52:	Int_AVLtree_set set;
+        -:   53:};
+        -:   54:
+        -:   55:class RXRotateInsertFixture : public testing::TestWithParam<std::tuple<int, int>> {
+        -:   56:public:
+        -:   57:protected:
+        -:   58:	Int_AVLtree_set set;
+        -:   59:};
+        -:   60:
+        -:   61:class MinimumFixture : public testing::TestWithParam<std::tuple<int, int, int>> {
+        -:   62:public:
+        -:   63:protected:
+        -:   64:	Int_AVLtree_set set;
+        -:   65:};
+        -:   66:
+        -:   67:class MaximumFixture : public testing::TestWithParam<std::tuple<int, int, int>> {
+        -:   68:public:
+        -:   69:protected:
+        -:   70:	Int_AVLtree_set set;
+        -:   71:};
+        -:   72:
+        -:   73:class RankFixture : public testing::TestWithParam<std::tuple<int, int, int>> {
+        -:   74:public:
+        -:   75:protected:
+        -:   76:	Int_AVLtree_set set;
+        -:   77:};
+        -:   78:
+        -:   79:class FindFixture : public testing::TestWithParam<std::tuple<int, int>> {
+        -:   80:public:
+        -:   81:protected:
+        -:   82:	Int_AVLtree_set set;
+        -:   83:};
+        -:   84:
+        -:   85:
+        -:   86:
+        -:   87:
+      12*:   88:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL63gtest_LXRotateInsertTestLXRotateInsertFixture_EvalGenerateName_RKN7testing13TestParamInfoISt5tupleIJiiEEEE:
+       6*:   88:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL60gtest_LXRotateInsertTestLXRotateInsertFixture_EvalGenerator_v:
+        6:   88:INSTANTIATE_TEST_CASE_P(
+------------------
+        -:   89:	LXRotateInsertTest, LXRotateInsertFixture,
+        -:   90:	testing::Values(std::make_tuple(1, 1), std::make_tuple(4, 0)));
+        -:   91:
+      12*:   92:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL63gtest_RXRotateInsertTestRXRotateInsertFixture_EvalGenerateName_RKN7testing13TestParamInfoISt5tupleIJiiEEEE:
+       6*:   92:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL60gtest_RXRotateInsertTestRXRotateInsertFixture_EvalGenerator_v:
+        6:   92:INSTANTIATE_TEST_CASE_P(
+------------------
+        -:   93:	RXRotateInsertTest, RXRotateInsertFixture,
+        -:   94:	testing::Values(std::make_tuple(10, 1), std::make_tuple(7, 0)));
+        -:   95:
+     120*:   96:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL49gtest_MinimumTestMinimumFixture_EvalGenerateName_RKN7testing13TestParamInfoISt5tupleIJiiiEEEE:
+     114*:   96:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL46gtest_MinimumTestMinimumFixture_EvalGenerator_v:
+        6:   96:INSTANTIATE_TEST_CASE_P(
+------------------
+        -:   97:	MinimumTest, MinimumFixture,
+        -:   98:	testing::Values(
+        -:   99:		std::make_tuple(1, 1, 4), std::make_tuple(2, 1, 4), std::make_tuple(3, 3, 4), std::make_tuple(4, 1, 4), std::make_tuple(5, 5, 4),
+        -:  100:		std::make_tuple(6, 5, 4), std::make_tuple(7, 7, 4), std::make_tuple(8, 1, 4), std::make_tuple(9, 9, 4), std::make_tuple(10, 9, 4),
+        -:  101:		std::make_tuple(11, 11, 4), std::make_tuple(12, 9, 4), std::make_tuple(13, 13, 4), std::make_tuple(14, 13, 4), std::make_tuple(15, 15, 4),
+        -:  102:		std::make_tuple(16, 1, 4), std::make_tuple(17, 17, 4), std::make_tuple(18, 17, 4), std::make_tuple(19, 19, 4), std::make_tuple(20, 17, 4),
+        -:  103:		std::make_tuple(21, 21, 4), std::make_tuple(22, 21, 4), std::make_tuple(23, 23, 4), std::make_tuple(24, 17, 4), std::make_tuple(25, 25, 5),
+        -:  104:		std::make_tuple(26, 25, 5), std::make_tuple(27, 27, 5), std::make_tuple(28, 25, 5), std::make_tuple(29, 29, 5), std::make_tuple(30, 29, 5),
+        -:  105:		std::make_tuple(31, 31, 5), std::make_tuple(32, 25, 5), std::make_tuple(33, 33, 5), std::make_tuple(34, 33, 5), std::make_tuple(35, 35, 5),
+        -:  106:		std::make_tuple(36, 33, 5), std::make_tuple(37, 37, 4), std::make_tuple(38, 38, 5)));
+        -:  107:
+     120*:  108:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL49gtest_MinimumTestMaximumFixture_EvalGenerateName_RKN7testing13TestParamInfoISt5tupleIJiiiEEEE:
+     114*:  108:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL46gtest_MinimumTestMaximumFixture_EvalGenerator_v:
+        6:  108:INSTANTIATE_TEST_CASE_P(
+------------------
+        -:  109:	MinimumTest, MaximumFixture,
+        -:  110:	testing::Values(
+        -:  111:		std::make_tuple(1, 1, 4), std::make_tuple(2, 3, 4), std::make_tuple(3, 3, 4), std::make_tuple(4, 7, 4), std::make_tuple(5, 5, 4),
+        -:  112:		std::make_tuple(6, 7, 4), std::make_tuple(7, 7, 4), std::make_tuple(8, 15, 4), std::make_tuple(9, 9, 4), std::make_tuple(10, 11, 4),
+        -:  113:		std::make_tuple(11, 11, 4), std::make_tuple(12, 15, 4), std::make_tuple(13, 13, 4), std::make_tuple(14, 15, 4), std::make_tuple(15, 15, 4),
+        -:  114:		std::make_tuple(16, 38, 5), std::make_tuple(17, 17, 4), std::make_tuple(18, 19, 4), std::make_tuple(19, 19, 4), std::make_tuple(20, 23, 4),
+        -:  115:		std::make_tuple(21, 21, 4), std::make_tuple(22, 23, 4), std::make_tuple(23, 23, 4), std::make_tuple(24, 38, 5), std::make_tuple(25, 25, 5),
+        -:  116:		std::make_tuple(26, 27, 5), std::make_tuple(27, 27, 5), std::make_tuple(28, 31, 5), std::make_tuple(29, 29, 5), std::make_tuple(30, 31, 5),
+        -:  117:		std::make_tuple(31, 31, 5), std::make_tuple(32, 38, 5), std::make_tuple(33, 33, 5), std::make_tuple(34, 35, 5), std::make_tuple(35, 35, 5),
+        -:  118:		std::make_tuple(36, 38, 5), std::make_tuple(37, 38, 5), std::make_tuple(38, 38, 5)));
+        -:  119:
+     120*:  120:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL43gtest_RankTestRankFixture_EvalGenerateName_RKN7testing13TestParamInfoISt5tupleIJiiiEEEE:
+     114*:  120:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL40gtest_RankTestRankFixture_EvalGenerator_v:
+        6:  120:INSTANTIATE_TEST_CASE_P(
+------------------
+        -:  121:	RankTest, RankFixture,
+        -:  122:	testing::Values(
+        -:  123:		std::make_tuple(1, 4, 1), std::make_tuple(2, 3, 2), std::make_tuple(3, 4, 3), std::make_tuple(4, 2, 4), std::make_tuple(5, 4, 5),
+        -:  124:		std::make_tuple(6, 3, 6), std::make_tuple(7, 4, 7), std::make_tuple(8, 1, 8), std::make_tuple(9, 4, 9), std::make_tuple(10, 3, 10),
+        -:  125:		std::make_tuple(11, 4, 11), std::make_tuple(12, 2, 12), std::make_tuple(13, 4, 13), std::make_tuple(14, 3, 14), std::make_tuple(15, 4, 15),
+        -:  126:		std::make_tuple(16, 0, 16), std::make_tuple(17, 4, 17), std::make_tuple(18, 3, 18), std::make_tuple(19, 4, 19), std::make_tuple(20, 2, 20),
+        -:  127:		std::make_tuple(21, 4, 21), std::make_tuple(22, 3, 22), std::make_tuple(23, 4, 23), std::make_tuple(24, 1, 24), std::make_tuple(25, 5, 25),
+        -:  128:		std::make_tuple(26, 4, 26), std::make_tuple(27, 5, 27), std::make_tuple(28, 3, 28), std::make_tuple(29, 5, 29), std::make_tuple(30, 4, 30),
+        -:  129:		std::make_tuple(31, 5, 31), std::make_tuple(32, 2, 32), std::make_tuple(33, 5, 33), std::make_tuple(34, 4, 34), std::make_tuple(35, 5, 35),
+        -:  130:		std::make_tuple(36, 3, 36), std::make_tuple(37, 4, 37), std::make_tuple(38, 5, 38)));
+        -:  131:
+     120*:  132:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL43gtest_FindTestFindFixture_EvalGenerateName_RKN7testing13TestParamInfoISt5tupleIJiiEEEE:
+     114*:  132:INSTANTIATE_TEST_CASE_P(
+------------------
+_ZL40gtest_FindTestFindFixture_EvalGenerator_v:
+        6:  132:INSTANTIATE_TEST_CASE_P(
+------------------
+        -:  133:	FindTest, FindFixture,
+        -:  134:	testing::Values(
+        -:  135:		std::make_tuple(1, 4), std::make_tuple(2, 3), std::make_tuple(3, 4), std::make_tuple(4, 2), std::make_tuple(5, 4),
+        -:  136:		std::make_tuple(6, 3), std::make_tuple(7, 4), std::make_tuple(8, 1), std::make_tuple(9, 4), std::make_tuple(10, 3),
+        -:  137:		std::make_tuple(11, 4), std::make_tuple(12, 2), std::make_tuple(13, 4), std::make_tuple(14, 3), std::make_tuple(15, 4),
+        -:  138:		std::make_tuple(16, 0), std::make_tuple(17, 4), std::make_tuple(18, 3), std::make_tuple(19, 4), std::make_tuple(20, 2),
+        -:  139:		std::make_tuple(21, 4), std::make_tuple(22, 3), std::make_tuple(23, 4), std::make_tuple(24, 1), std::make_tuple(25, 5),
+        -:  140:		std::make_tuple(26, 4), std::make_tuple(27, 5), std::make_tuple(28, 3), std::make_tuple(29, 5), std::make_tuple(30, 4),
+        -:  141:		std::make_tuple(31, 5), std::make_tuple(32, 2), std::make_tuple(33, 5), std::make_tuple(34, 4), std::make_tuple(35, 5),
+        -:  142:		std::make_tuple(36, 3), std::make_tuple(37, 4), std::make_tuple(38, 5)));
+        -:  143:
+       12:  144:TEST(InsertTest, TestInsertOnEmpty) {
+        3:  145:	Int_AVLtree_set set;
+       3*:  146:	ASSERT_EQ(0, set.Insert(5));
+        -:  147:}
+------------------
+_ZN33InsertTest_TestInsertOnEmpty_TestC2Ev:
+        3:  144:TEST(InsertTest, TestInsertOnEmpty) {
+------------------
+_ZN33InsertTest_TestInsertOnEmpty_TestD0Ev:
+        3:  144:TEST(InsertTest, TestInsertOnEmpty) {
+------------------
+_ZN33InsertTest_TestInsertOnEmpty_TestD2Ev:
+        3:  144:TEST(InsertTest, TestInsertOnEmpty) {
+------------------
+_ZN33InsertTest_TestInsertOnEmpty_Test8TestBodyEv:
+        3:  144:TEST(InsertTest, TestInsertOnEmpty) {
+        3:  145:	Int_AVLtree_set set;
+       3*:  146:	ASSERT_EQ(0, set.Insert(5));
+        -:  147:}
+------------------
+        -:  148:
+       12:  149:TEST(EmptyTest, TestEmptyOnEmpty) {
+        3:  150:	Int_AVLtree_set set;
+       3*:  151:	ASSERT_EQ(1, set.Empty());
+        -:  152:}
+------------------
+_ZN31EmptyTest_TestEmptyOnEmpty_TestC2Ev:
+        3:  149:TEST(EmptyTest, TestEmptyOnEmpty) {
+------------------
+_ZN31EmptyTest_TestEmptyOnEmpty_TestD0Ev:
+        3:  149:TEST(EmptyTest, TestEmptyOnEmpty) {
+------------------
+_ZN31EmptyTest_TestEmptyOnEmpty_TestD2Ev:
+        3:  149:TEST(EmptyTest, TestEmptyOnEmpty) {
+------------------
+_ZN31EmptyTest_TestEmptyOnEmpty_Test8TestBodyEv:
+        3:  149:TEST(EmptyTest, TestEmptyOnEmpty) {
+        3:  150:	Int_AVLtree_set set;
+       3*:  151:	ASSERT_EQ(1, set.Empty());
+        -:  152:}
+------------------
+        -:  153:
+       12:  154:TEST(EmptyTest, TestEmptyOnNotEmpty) {
+        3:  155:	Int_AVLtree_set set;
+        3:  156:	set.Insert(1);
+       3*:  157:	ASSERT_EQ(0, set.Empty());
+        -:  158:}
+------------------
+_ZN34EmptyTest_TestEmptyOnNotEmpty_TestC2Ev:
+        3:  154:TEST(EmptyTest, TestEmptyOnNotEmpty) {
+------------------
+_ZN34EmptyTest_TestEmptyOnNotEmpty_TestD0Ev:
+        3:  154:TEST(EmptyTest, TestEmptyOnNotEmpty) {
+------------------
+_ZN34EmptyTest_TestEmptyOnNotEmpty_TestD2Ev:
+        3:  154:TEST(EmptyTest, TestEmptyOnNotEmpty) {
+------------------
+_ZN34EmptyTest_TestEmptyOnNotEmpty_Test8TestBodyEv:
+        3:  154:TEST(EmptyTest, TestEmptyOnNotEmpty) {
+        3:  155:	Int_AVLtree_set set;
+        3:  156:	set.Insert(1);
+       3*:  157:	ASSERT_EQ(0, set.Empty());
+        -:  158:}
+------------------
+        -:  159:
+       12:  160:TEST(SizeTest, TestSizeOnEmpty) {
+        3:  161:	Int_AVLtree_set set;
+       3*:  162:	ASSERT_EQ(0, set.Size());
+        -:  163:}
+------------------
+_ZN29SizeTest_TestSizeOnEmpty_TestC2Ev:
+        3:  160:TEST(SizeTest, TestSizeOnEmpty) {
+------------------
+_ZN29SizeTest_TestSizeOnEmpty_TestD0Ev:
+        3:  160:TEST(SizeTest, TestSizeOnEmpty) {
+------------------
+_ZN29SizeTest_TestSizeOnEmpty_TestD2Ev:
+        3:  160:TEST(SizeTest, TestSizeOnEmpty) {
+------------------
+_ZN29SizeTest_TestSizeOnEmpty_Test8TestBodyEv:
+        3:  160:TEST(SizeTest, TestSizeOnEmpty) {
+        3:  161:	Int_AVLtree_set set;
+       3*:  162:	ASSERT_EQ(0, set.Size());
+        -:  163:}
+------------------
+        -:  164:
+       12:  165:TEST(SizeTest, TestSize) {
+        3:  166:	Int_AVLtree_set set;
+        3:  167:	set.Insert(1);
+       3*:  168:	ASSERT_EQ(1, set.Size());
+        3:  169:	set.Insert(5);
+       3*:  170:	ASSERT_EQ(2, set.Size());
+        3:  171:	set.Insert(3);
+       3*:  172:	ASSERT_EQ(3, set.Size());
+        -:  173:}
+------------------
+_ZN22SizeTest_TestSize_TestC2Ev:
+        3:  165:TEST(SizeTest, TestSize) {
+------------------
+_ZN22SizeTest_TestSize_TestD0Ev:
+        3:  165:TEST(SizeTest, TestSize) {
+------------------
+_ZN22SizeTest_TestSize_TestD2Ev:
+        3:  165:TEST(SizeTest, TestSize) {
+------------------
+_ZN22SizeTest_TestSize_Test8TestBodyEv:
+        3:  165:TEST(SizeTest, TestSize) {
+        3:  166:	Int_AVLtree_set set;
+        3:  167:	set.Insert(1);
+       3*:  168:	ASSERT_EQ(1, set.Size());
+        3:  169:	set.Insert(5);
+       3*:  170:	ASSERT_EQ(2, set.Size());
+        3:  171:	set.Insert(3);
+       3*:  172:	ASSERT_EQ(3, set.Size());
+        -:  173:}
+------------------
+        -:  174:
+       12:  175:TEST(MaximumTest, TestMaximumXIsMax) {
+        3:  176:	Int_AVLtree_set set;
+        3:  177:	set.Insert(5);
+        3:  178:	set.Insert(2);
+        3:  179:	std::pair<int, int> pair = set.Maximum(5);
+        3:  180:	int key = pair.first;
+        3:  181:	int depth = pair.second;
+       3*:  182:	ASSERT_EQ(5, key);
+       3*:  183:	ASSERT_EQ(0, depth);
+        -:  184:}
+------------------
+_ZN34MaximumTest_TestMaximumXIsMax_TestC2Ev:
+        3:  175:TEST(MaximumTest, TestMaximumXIsMax) {
+------------------
+_ZN34MaximumTest_TestMaximumXIsMax_TestD0Ev:
+        3:  175:TEST(MaximumTest, TestMaximumXIsMax) {
+------------------
+_ZN34MaximumTest_TestMaximumXIsMax_TestD2Ev:
+        3:  175:TEST(MaximumTest, TestMaximumXIsMax) {
+------------------
+_ZN34MaximumTest_TestMaximumXIsMax_Test8TestBodyEv:
+        3:  175:TEST(MaximumTest, TestMaximumXIsMax) {
+        3:  176:	Int_AVLtree_set set;
+        3:  177:	set.Insert(5);
+        3:  178:	set.Insert(2);
+        3:  179:	std::pair<int, int> pair = set.Maximum(5);
+        3:  180:	int key = pair.first;
+        3:  181:	int depth = pair.second;
+       3*:  182:	ASSERT_EQ(5, key);
+       3*:  183:	ASSERT_EQ(0, depth);
+        -:  184:}
+------------------
+        -:  185:
+       12:  186:TEST(MinimumTest, TestMinimumXIsMin) {
+        3:  187:	Int_AVLtree_set set;
+        3:  188:	set.Insert(5);
+        3:  189:	set.Insert(2);
+        3:  190:	std::pair<int, int> pair = set.Maximum(2);
+        3:  191:	int key = pair.first;
+        3:  192:	int depth = pair.second;
+       3*:  193:	ASSERT_EQ(2, key);
+       3*:  194:	ASSERT_EQ(1, depth);
+        -:  195:}
+------------------
+_ZN34MinimumTest_TestMinimumXIsMin_TestC2Ev:
+        3:  186:TEST(MinimumTest, TestMinimumXIsMin) {
+------------------
+_ZN34MinimumTest_TestMinimumXIsMin_TestD0Ev:
+        3:  186:TEST(MinimumTest, TestMinimumXIsMin) {
+------------------
+_ZN34MinimumTest_TestMinimumXIsMin_TestD2Ev:
+        3:  186:TEST(MinimumTest, TestMinimumXIsMin) {
+------------------
+_ZN34MinimumTest_TestMinimumXIsMin_Test8TestBodyEv:
+        3:  186:TEST(MinimumTest, TestMinimumXIsMin) {
+        3:  187:	Int_AVLtree_set set;
+        3:  188:	set.Insert(5);
+        3:  189:	set.Insert(2);
+        3:  190:	std::pair<int, int> pair = set.Maximum(2);
+        3:  191:	int key = pair.first;
+        3:  192:	int depth = pair.second;
+       3*:  193:	ASSERT_EQ(2, key);
+       3*:  194:	ASSERT_EQ(1, depth);
+        -:  195:}
+------------------
+        -:  196:
+       12:  197:TEST(FindTest, TestFindOnEmpty) {
+        3:  198:	Int_AVLtree_set set;
+       3*:  199:	ASSERT_EQ(0, set.Find(5));
+        -:  200:}
+------------------
+_ZN29FindTest_TestFindOnEmpty_TestC2Ev:
+        3:  197:TEST(FindTest, TestFindOnEmpty) {
+------------------
+_ZN29FindTest_TestFindOnEmpty_TestD0Ev:
+        3:  197:TEST(FindTest, TestFindOnEmpty) {
+------------------
+_ZN29FindTest_TestFindOnEmpty_TestD2Ev:
+        3:  197:TEST(FindTest, TestFindOnEmpty) {
+------------------
+_ZN29FindTest_TestFindOnEmpty_Test8TestBodyEv:
+        3:  197:TEST(FindTest, TestFindOnEmpty) {
+        3:  198:	Int_AVLtree_set set;
+       3*:  199:	ASSERT_EQ(0, set.Find(5));
+        -:  200:}
+------------------
+        -:  201:
+       12:  202:TEST(FindTest, TestFindOnRoot) {
+        3:  203:	Int_AVLtree_set set;
+        3:  204:	set.Insert(5);
+       3*:  205:	ASSERT_EQ(0, set.Find(5));
+        -:  206:}
+------------------
+_ZN28FindTest_TestFindOnRoot_TestC2Ev:
+        3:  202:TEST(FindTest, TestFindOnRoot) {
+------------------
+_ZN28FindTest_TestFindOnRoot_TestD0Ev:
+        3:  202:TEST(FindTest, TestFindOnRoot) {
+------------------
+_ZN28FindTest_TestFindOnRoot_TestD2Ev:
+        3:  202:TEST(FindTest, TestFindOnRoot) {
+------------------
+_ZN28FindTest_TestFindOnRoot_Test8TestBodyEv:
+        3:  202:TEST(FindTest, TestFindOnRoot) {
+        3:  203:	Int_AVLtree_set set;
+        3:  204:	set.Insert(5);
+       3*:  205:	ASSERT_EQ(0, set.Find(5));
+        -:  206:}
+------------------
+        -:  207:
+       12:  208:TEST(EraseTest, TestEraseOnEmpty) {
+        3:  209:	Int_AVLtree_set set;
+       3*:  210:	ASSERT_EQ(0, set.Erase(2));
+        -:  211:}
+------------------
+_ZN31EraseTest_TestEraseOnEmpty_TestC2Ev:
+        3:  208:TEST(EraseTest, TestEraseOnEmpty) {
+------------------
+_ZN31EraseTest_TestEraseOnEmpty_TestD0Ev:
+        3:  208:TEST(EraseTest, TestEraseOnEmpty) {
+------------------
+_ZN31EraseTest_TestEraseOnEmpty_TestD2Ev:
+        3:  208:TEST(EraseTest, TestEraseOnEmpty) {
+------------------
+_ZN31EraseTest_TestEraseOnEmpty_Test8TestBodyEv:
+        3:  208:TEST(EraseTest, TestEraseOnEmpty) {
+        3:  209:	Int_AVLtree_set set;
+       3*:  210:	ASSERT_EQ(0, set.Erase(2));
+        -:  211:}
+------------------
+        -:  212:
+       12:  213:TEST(EraseTest, TestEraseRoot) {
+        3:  214:	Int_AVLtree_set set;
+        3:  215:	set.Insert(5);
+       3*:  216:	ASSERT_EQ(0, set.Erase(5));
+        -:  217:}
+------------------
+_ZN28EraseTest_TestEraseRoot_TestC2Ev:
+        3:  213:TEST(EraseTest, TestEraseRoot) {
+------------------
+_ZN28EraseTest_TestEraseRoot_TestD0Ev:
+        3:  213:TEST(EraseTest, TestEraseRoot) {
+------------------
+_ZN28EraseTest_TestEraseRoot_TestD2Ev:
+        3:  213:TEST(EraseTest, TestEraseRoot) {
+------------------
+_ZN28EraseTest_TestEraseRoot_Test8TestBodyEv:
+        3:  213:TEST(EraseTest, TestEraseRoot) {
+        3:  214:	Int_AVLtree_set set;
+        3:  215:	set.Insert(5);
+       3*:  216:	ASSERT_EQ(0, set.Erase(5));
+        -:  217:}
+------------------
+        -:  218:
+       12:  219:TEST(RankTest, TestRankRoot) {
+        3:  220:	Int_AVLtree_set set;
+        3:  221:	set.Insert(5);
+        3:  222:	std::pair<int, int> pair = set.Rank(5);
+        3:  223:	int depth = pair.first;
+        3:  224:	int rank = pair.second;
+       3*:  225:	ASSERT_EQ(0, depth);
+       3*:  226:	ASSERT_EQ(1, rank);
+        -:  227:}
+------------------
+_ZN26RankTest_TestRankRoot_TestC2Ev:
+        3:  219:TEST(RankTest, TestRankRoot) {
+------------------
+_ZN26RankTest_TestRankRoot_TestD0Ev:
+        3:  219:TEST(RankTest, TestRankRoot) {
+------------------
+_ZN26RankTest_TestRankRoot_TestD2Ev:
+        3:  219:TEST(RankTest, TestRankRoot) {
+------------------
+_ZN26RankTest_TestRankRoot_Test8TestBodyEv:
+        3:  219:TEST(RankTest, TestRankRoot) {
+        3:  220:	Int_AVLtree_set set;
+        3:  221:	set.Insert(5);
+        3:  222:	std::pair<int, int> pair = set.Rank(5);
+        3:  223:	int depth = pair.first;
+        3:  224:	int rank = pair.second;
+       3*:  225:	ASSERT_EQ(0, depth);
+       3*:  226:	ASSERT_EQ(1, rank);
+        -:  227:}
+------------------
+        -:  228:
+       12:  229:TEST(AVLtreeTest, AVLtreeTest) {
+        3:  230:	Int_AVLtree_set set;
+       3*:  231:	ASSERT_EQ(0, set.Insert(1));
+       3*:  232:	ASSERT_EQ(1, set.Insert(2));
+       3*:  233:	ASSERT_EQ(1, set.Insert(3));
+       3*:  234:	ASSERT_EQ(2, set.Insert(4));
+       3*:  235:	ASSERT_EQ(2, set.Insert(5));
+       3*:  236:	ASSERT_EQ(2, set.Insert(6));
+       3*:  237:	ASSERT_EQ(2, set.Insert(7));
+       3*:  238:	ASSERT_EQ(3, set.Insert(8));
+       3*:  239:	ASSERT_EQ(3, set.Insert(9));
+       3*:  240:	ASSERT_EQ(3, set.Insert(10));
+       3*:  241:	ASSERT_EQ(3, set.Insert(11));
+       3*:  242:	ASSERT_EQ(3, set.Insert(12));
+       3*:  243:	ASSERT_EQ(3, set.Insert(13));
+       3*:  244:	ASSERT_EQ(3, set.Insert(14));
+       3*:  245:	ASSERT_EQ(3, set.Insert(15));
+       3*:  246:	ASSERT_EQ(4, set.Insert(16));
+       3*:  247:	ASSERT_EQ(4, set.Insert(17));
+       3*:  248:	ASSERT_EQ(4, set.Insert(18));
+       3*:  249:	ASSERT_EQ(4, set.Insert(19));
+       3*:  250:	ASSERT_EQ(4, set.Insert(20));
+       3*:  251:	ASSERT_EQ(4, set.Insert(21));
+       3*:  252:	ASSERT_EQ(4, set.Insert(22));
+       3*:  253:	ASSERT_EQ(4, set.Insert(23));
+       3*:  254:	ASSERT_EQ(4, set.Insert(24));
+       3*:  255:	ASSERT_EQ(4, set.Insert(25));
+       3*:  256:	ASSERT_EQ(4, set.Insert(26));
+       3*:  257:	ASSERT_EQ(4, set.Insert(27));
+       3*:  258:	ASSERT_EQ(4, set.Insert(28));
+       3*:  259:	ASSERT_EQ(4, set.Insert(29));
+       3*:  260:	ASSERT_EQ(4, set.Insert(30));
+       3*:  261:	ASSERT_EQ(4, set.Insert(31));
+       3*:  262:	ASSERT_EQ(5, set.Insert(32));
+       3*:  263:	ASSERT_EQ(5, set.Insert(33));
+       3*:  264:	ASSERT_EQ(5, set.Insert(34));
+       3*:  265:	ASSERT_EQ(5, set.Insert(35));
+       3*:  266:	ASSERT_EQ(5, set.Insert(36));
+       3*:  267:	ASSERT_EQ(5, set.Insert(37));
+       3*:  268:	ASSERT_EQ(5, set.Insert(38));
+        -:  269:
+       3*:  270:	ASSERT_EQ(4, set.Erase(7));
+       3*:  271:	ASSERT_EQ(4, set.Erase(13));
+       3*:  272:	ASSERT_EQ(2, set.Erase(32));
+       3*:  273:	ASSERT_EQ(3, set.Erase(10));
+       3*:  274:	ASSERT_EQ(5, set.Erase(31));
+       3*:  275:	ASSERT_EQ(1, set.Erase(24));
+       3*:  276:	ASSERT_EQ(2, set.Erase(12));
+       3*:  277:	ASSERT_EQ(4, set.Erase(1));
+       3*:  278:	ASSERT_EQ(1, set.Erase(25));
+       3*:  279:	ASSERT_EQ(3, set.Erase(11));
+       3*:  280:	ASSERT_EQ(1, set.Erase(26));
+       3*:  281:	ASSERT_EQ(5, set.Erase(38));
+       3*:  282:	ASSERT_EQ(0, set.Erase(16));
+       3*:  283:	ASSERT_EQ(4, set.Erase(34));
+       3*:  284:	ASSERT_EQ(1, set.Erase(27));
+       3*:  285:	ASSERT_EQ(4, set.Erase(5));
+       3*:  286:	ASSERT_EQ(1, set.Erase(28));
+       3*:  287:	ASSERT_EQ(3, set.Erase(36));
+       3*:  288:	ASSERT_EQ(3, set.Erase(6));
+       3*:  289:	ASSERT_EQ(3, set.Erase(9));
+       3*:  290:	ASSERT_EQ(3, set.Erase(18));
+       3*:  291:	ASSERT_EQ(4, set.Erase(23));
+       3*:  292:	ASSERT_EQ(3, set.Erase(2));
+       3*:  293:	ASSERT_EQ(3, set.Erase(19));
+       3*:  294:	ASSERT_EQ(2, set.Erase(14));
+       3*:  295:	ASSERT_EQ(3, set.Erase(22));
+       3*:  296:	ASSERT_EQ(1, set.Erase(8));
+       3*:  297:	ASSERT_EQ(2, set.Erase(30));
+       3*:  298:	ASSERT_EQ(3, set.Erase(15));
+       3*:  299:	ASSERT_EQ(3, set.Erase(3));
+       3*:  300:	ASSERT_EQ(2, set.Erase(37));
+       3*:  301:	ASSERT_EQ(1, set.Erase(17));
+       3*:  302:	ASSERT_EQ(0, set.Erase(29));
+       3*:  303:	ASSERT_EQ(2, set.Erase(4));
+       3*:  304:	ASSERT_EQ(1, set.Erase(35));
+       3*:  305:	ASSERT_EQ(1, set.Erase(20));
+       3*:  306:	ASSERT_EQ(1, set.Erase(33));
+       3*:  307:	ASSERT_EQ(0, set.Erase(21));
+        -:  308:
+        -:  309:}
+------------------
+_ZN28AVLtreeTest_AVLtreeTest_TestC2Ev:
+        3:  229:TEST(AVLtreeTest, AVLtreeTest) {
+------------------
+_ZN28AVLtreeTest_AVLtreeTest_TestD0Ev:
+        3:  229:TEST(AVLtreeTest, AVLtreeTest) {
+------------------
+_ZN28AVLtreeTest_AVLtreeTest_TestD2Ev:
+        3:  229:TEST(AVLtreeTest, AVLtreeTest) {
+------------------
+_ZN28AVLtreeTest_AVLtreeTest_Test8TestBodyEv:
+        3:  229:TEST(AVLtreeTest, AVLtreeTest) {
+        3:  230:	Int_AVLtree_set set;
+       3*:  231:	ASSERT_EQ(0, set.Insert(1));
+       3*:  232:	ASSERT_EQ(1, set.Insert(2));
+       3*:  233:	ASSERT_EQ(1, set.Insert(3));
+       3*:  234:	ASSERT_EQ(2, set.Insert(4));
+       3*:  235:	ASSERT_EQ(2, set.Insert(5));
+       3*:  236:	ASSERT_EQ(2, set.Insert(6));
+       3*:  237:	ASSERT_EQ(2, set.Insert(7));
+       3*:  238:	ASSERT_EQ(3, set.Insert(8));
+       3*:  239:	ASSERT_EQ(3, set.Insert(9));
+       3*:  240:	ASSERT_EQ(3, set.Insert(10));
+       3*:  241:	ASSERT_EQ(3, set.Insert(11));
+       3*:  242:	ASSERT_EQ(3, set.Insert(12));
+       3*:  243:	ASSERT_EQ(3, set.Insert(13));
+       3*:  244:	ASSERT_EQ(3, set.Insert(14));
+       3*:  245:	ASSERT_EQ(3, set.Insert(15));
+       3*:  246:	ASSERT_EQ(4, set.Insert(16));
+       3*:  247:	ASSERT_EQ(4, set.Insert(17));
+       3*:  248:	ASSERT_EQ(4, set.Insert(18));
+       3*:  249:	ASSERT_EQ(4, set.Insert(19));
+       3*:  250:	ASSERT_EQ(4, set.Insert(20));
+       3*:  251:	ASSERT_EQ(4, set.Insert(21));
+       3*:  252:	ASSERT_EQ(4, set.Insert(22));
+       3*:  253:	ASSERT_EQ(4, set.Insert(23));
+       3*:  254:	ASSERT_EQ(4, set.Insert(24));
+       3*:  255:	ASSERT_EQ(4, set.Insert(25));
+       3*:  256:	ASSERT_EQ(4, set.Insert(26));
+       3*:  257:	ASSERT_EQ(4, set.Insert(27));
+       3*:  258:	ASSERT_EQ(4, set.Insert(28));
+       3*:  259:	ASSERT_EQ(4, set.Insert(29));
+       3*:  260:	ASSERT_EQ(4, set.Insert(30));
+       3*:  261:	ASSERT_EQ(4, set.Insert(31));
+       3*:  262:	ASSERT_EQ(5, set.Insert(32));
+       3*:  263:	ASSERT_EQ(5, set.Insert(33));
+       3*:  264:	ASSERT_EQ(5, set.Insert(34));
+       3*:  265:	ASSERT_EQ(5, set.Insert(35));
+       3*:  266:	ASSERT_EQ(5, set.Insert(36));
+       3*:  267:	ASSERT_EQ(5, set.Insert(37));
+       3*:  268:	ASSERT_EQ(5, set.Insert(38));
+        -:  269:
+       3*:  270:	ASSERT_EQ(4, set.Erase(7));
+       3*:  271:	ASSERT_EQ(4, set.Erase(13));
+       3*:  272:	ASSERT_EQ(2, set.Erase(32));
+       3*:  273:	ASSERT_EQ(3, set.Erase(10));
+       3*:  274:	ASSERT_EQ(5, set.Erase(31));
+       3*:  275:	ASSERT_EQ(1, set.Erase(24));
+       3*:  276:	ASSERT_EQ(2, set.Erase(12));
+       3*:  277:	ASSERT_EQ(4, set.Erase(1));
+       3*:  278:	ASSERT_EQ(1, set.Erase(25));
+       3*:  279:	ASSERT_EQ(3, set.Erase(11));
+       3*:  280:	ASSERT_EQ(1, set.Erase(26));
+       3*:  281:	ASSERT_EQ(5, set.Erase(38));
+       3*:  282:	ASSERT_EQ(0, set.Erase(16));
+       3*:  283:	ASSERT_EQ(4, set.Erase(34));
+       3*:  284:	ASSERT_EQ(1, set.Erase(27));
+       3*:  285:	ASSERT_EQ(4, set.Erase(5));
+       3*:  286:	ASSERT_EQ(1, set.Erase(28));
+       3*:  287:	ASSERT_EQ(3, set.Erase(36));
+       3*:  288:	ASSERT_EQ(3, set.Erase(6));
+       3*:  289:	ASSERT_EQ(3, set.Erase(9));
+       3*:  290:	ASSERT_EQ(3, set.Erase(18));
+       3*:  291:	ASSERT_EQ(4, set.Erase(23));
+       3*:  292:	ASSERT_EQ(3, set.Erase(2));
+       3*:  293:	ASSERT_EQ(3, set.Erase(19));
+       3*:  294:	ASSERT_EQ(2, set.Erase(14));
+       3*:  295:	ASSERT_EQ(3, set.Erase(22));
+       3*:  296:	ASSERT_EQ(1, set.Erase(8));
+       3*:  297:	ASSERT_EQ(2, set.Erase(30));
+       3*:  298:	ASSERT_EQ(3, set.Erase(15));
+       3*:  299:	ASSERT_EQ(3, set.Erase(3));
+       3*:  300:	ASSERT_EQ(2, set.Erase(37));
+       3*:  301:	ASSERT_EQ(1, set.Erase(17));
+       3*:  302:	ASSERT_EQ(0, set.Erase(29));
+       3*:  303:	ASSERT_EQ(2, set.Erase(4));
+       3*:  304:	ASSERT_EQ(1, set.Erase(35));
+       3*:  305:	ASSERT_EQ(1, set.Erase(20));
+       3*:  306:	ASSERT_EQ(1, set.Erase(33));
+       3*:  307:	ASSERT_EQ(0, set.Erase(21));
+        -:  308:
+        -:  309:}
+------------------
+        -:  310:
+       12:  311:TEST_F(SetTestFixture, TestInsertExist) {
+        3:  312:	std::cout << "Test body\n";
+       3*:  313:	ASSERT_EQ(-1, set.Insert(5));
+        -:  314:}
+------------------
+_ZN35SetTestFixture_TestInsertExist_TestC2Ev:
+        3:  311:TEST_F(SetTestFixture, TestInsertExist) {
+------------------
+_ZN35SetTestFixture_TestInsertExist_TestD0Ev:
+        3:  311:TEST_F(SetTestFixture, TestInsertExist) {
+------------------
+_ZN35SetTestFixture_TestInsertExist_TestD2Ev:
+        3:  311:TEST_F(SetTestFixture, TestInsertExist) {
+------------------
+_ZN35SetTestFixture_TestInsertExist_Test8TestBodyEv:
+        3:  311:TEST_F(SetTestFixture, TestInsertExist) {
+        3:  312:	std::cout << "Test body\n";
+       3*:  313:	ASSERT_EQ(-1, set.Insert(5));
+        -:  314:}
+------------------
+        -:  315:
+        -:  316:
+       12:  317:TEST_F(SetTestFixture, TestInsertLeftChild) {
+       3*:  318:	ASSERT_EQ(3, set.Insert(1));
+        -:  319:}
+------------------
+_ZN39SetTestFixture_TestInsertLeftChild_TestC2Ev:
+        3:  317:TEST_F(SetTestFixture, TestInsertLeftChild) {
+------------------
+_ZN39SetTestFixture_TestInsertLeftChild_TestD0Ev:
+        3:  317:TEST_F(SetTestFixture, TestInsertLeftChild) {
+------------------
+_ZN39SetTestFixture_TestInsertLeftChild_TestD2Ev:
+        3:  317:TEST_F(SetTestFixture, TestInsertLeftChild) {
+------------------
+_ZN39SetTestFixture_TestInsertLeftChild_Test8TestBodyEv:
+        3:  317:TEST_F(SetTestFixture, TestInsertLeftChild) {
+       3*:  318:	ASSERT_EQ(3, set.Insert(1));
+        -:  319:}
+------------------
+        -:  320:
+       12:  321:TEST_F(SetTestFixture, TestInsertRightChild) {
+       3*:  322:	ASSERT_EQ(3, set.Insert(20));
+        -:  323:}
+------------------
+_ZN40SetTestFixture_TestInsertRightChild_TestC2Ev:
+        3:  321:TEST_F(SetTestFixture, TestInsertRightChild) {
+------------------
+_ZN40SetTestFixture_TestInsertRightChild_TestD0Ev:
+        3:  321:TEST_F(SetTestFixture, TestInsertRightChild) {
+------------------
+_ZN40SetTestFixture_TestInsertRightChild_TestD2Ev:
+        3:  321:TEST_F(SetTestFixture, TestInsertRightChild) {
+------------------
+_ZN40SetTestFixture_TestInsertRightChild_Test8TestBodyEv:
+        3:  321:TEST_F(SetTestFixture, TestInsertRightChild) {
+       3*:  322:	ASSERT_EQ(3, set.Insert(20));
+        -:  323:}
+------------------
+        -:  324:
+       12:  325:TEST_F(SetTestFixture, TestMaximumXIsNotMAx) {
+        3:  326:	std::pair<int, int> pair = set.Maximum(2);
+        3:  327:	int key = pair.first;
+        3:  328:	int depth = pair.second;
+       3*:  329:	ASSERT_EQ(2, key);
+       3*:  330:	ASSERT_EQ(2, depth);
+        -:  331:}
+------------------
+_ZN40SetTestFixture_TestMaximumXIsNotMAx_TestC2Ev:
+        3:  325:TEST_F(SetTestFixture, TestMaximumXIsNotMAx) {
+------------------
+_ZN40SetTestFixture_TestMaximumXIsNotMAx_TestD0Ev:
+        3:  325:TEST_F(SetTestFixture, TestMaximumXIsNotMAx) {
+------------------
+_ZN40SetTestFixture_TestMaximumXIsNotMAx_TestD2Ev:
+        3:  325:TEST_F(SetTestFixture, TestMaximumXIsNotMAx) {
+------------------
+_ZN40SetTestFixture_TestMaximumXIsNotMAx_Test8TestBodyEv:
+        3:  325:TEST_F(SetTestFixture, TestMaximumXIsNotMAx) {
+        3:  326:	std::pair<int, int> pair = set.Maximum(2);
+        3:  327:	int key = pair.first;
+        3:  328:	int depth = pair.second;
+       3*:  329:	ASSERT_EQ(2, key);
+       3*:  330:	ASSERT_EQ(2, depth);
+        -:  331:}
+------------------
+        -:  332:
+       12:  333:TEST_F(SetTestFixture, TestMinimumXIsNotMAx) {
+        3:  334:	std::pair<int, int> pair = set.Minimum(17);
+        3:  335:	int key = pair.first;
+        3:  336:	int depth = pair.second;
+       3*:  337:	ASSERT_EQ(17, key);
+       3*:  338:	ASSERT_EQ(2, depth);
+        -:  339:}
+------------------
+_ZN40SetTestFixture_TestMinimumXIsNotMAx_TestC2Ev:
+        3:  333:TEST_F(SetTestFixture, TestMinimumXIsNotMAx) {
+------------------
+_ZN40SetTestFixture_TestMinimumXIsNotMAx_TestD0Ev:
+        3:  333:TEST_F(SetTestFixture, TestMinimumXIsNotMAx) {
+------------------
+_ZN40SetTestFixture_TestMinimumXIsNotMAx_TestD2Ev:
+        3:  333:TEST_F(SetTestFixture, TestMinimumXIsNotMAx) {
+------------------
+_ZN40SetTestFixture_TestMinimumXIsNotMAx_Test8TestBodyEv:
+        3:  333:TEST_F(SetTestFixture, TestMinimumXIsNotMAx) {
+        3:  334:	std::pair<int, int> pair = set.Minimum(17);
+        3:  335:	int key = pair.first;
+        3:  336:	int depth = pair.second;
+       3*:  337:	ASSERT_EQ(17, key);
+       3*:  338:	ASSERT_EQ(2, depth);
+        -:  339:}
+------------------
+        -:  340:
+       12:  341:TEST_F(SetTestFixture, TestFindLeaf) {
+       3*:  342:	ASSERT_EQ(2, set.Find(2));
+       3*:  343:	ASSERT_EQ(2, set.Find(17));
+        -:  344:}
+------------------
+_ZN32SetTestFixture_TestFindLeaf_TestC2Ev:
+        3:  341:TEST_F(SetTestFixture, TestFindLeaf) {
+------------------
+_ZN32SetTestFixture_TestFindLeaf_TestD0Ev:
+        3:  341:TEST_F(SetTestFixture, TestFindLeaf) {
+------------------
+_ZN32SetTestFixture_TestFindLeaf_TestD2Ev:
+        3:  341:TEST_F(SetTestFixture, TestFindLeaf) {
+------------------
+_ZN32SetTestFixture_TestFindLeaf_Test8TestBodyEv:
+        3:  341:TEST_F(SetTestFixture, TestFindLeaf) {
+       3*:  342:	ASSERT_EQ(2, set.Find(2));
+       3*:  343:	ASSERT_EQ(2, set.Find(17));
+        -:  344:}
+------------------
+        -:  345:
+       12:  346:TEST_F(SetTestFixture, TestEraseUsingSuccessor) {
+       3*:  347:	ASSERT_EQ(1, set.Find(5));
+       3*:  348:	ASSERT_EQ(1, set.Find(15));
+        -:  349:}
+------------------
+_ZN43SetTestFixture_TestEraseUsingSuccessor_TestC2Ev:
+        3:  346:TEST_F(SetTestFixture, TestEraseUsingSuccessor) {
+------------------
+_ZN43SetTestFixture_TestEraseUsingSuccessor_TestD0Ev:
+        3:  346:TEST_F(SetTestFixture, TestEraseUsingSuccessor) {
+------------------
+_ZN43SetTestFixture_TestEraseUsingSuccessor_TestD2Ev:
+        3:  346:TEST_F(SetTestFixture, TestEraseUsingSuccessor) {
+------------------
+_ZN43SetTestFixture_TestEraseUsingSuccessor_Test8TestBodyEv:
+        3:  346:TEST_F(SetTestFixture, TestEraseUsingSuccessor) {
+       3*:  347:	ASSERT_EQ(1, set.Find(5));
+       3*:  348:	ASSERT_EQ(1, set.Find(15));
+        -:  349:}
+------------------
+        -:  350:
+       12:  351:TEST_F(SetTestFixture, TestRankSetUp) {
+        3:  352:	std::pair<int, int> pair = set.Rank(17);
+        3:  353:	int depth = pair.first;
+        3:  354:	int rank = pair.second;
+       3*:  355:	ASSERT_EQ(2, depth);
+       3*:  356:	ASSERT_EQ(7, rank);
+        -:  357:
+        3:  358:	pair = set.Rank(2);
+        3:  359:	depth = pair.first;
+        3:  360:	rank = pair.second;
+       3*:  361:	ASSERT_EQ(2, depth);
+       3*:  362:	ASSERT_EQ(1, rank);
+        -:  363:
+        3:  364:	pair = set.Rank(5);
+        3:  365:	depth = pair.first;
+        3:  366:	rank = pair.second;
+       3*:  367:	ASSERT_EQ(1, depth);
+       3*:  368:	ASSERT_EQ(2, rank);
+        -:  369:}
+------------------
+_ZN33SetTestFixture_TestRankSetUp_TestC2Ev:
+        3:  351:TEST_F(SetTestFixture, TestRankSetUp) {
+------------------
+_ZN33SetTestFixture_TestRankSetUp_TestD0Ev:
+        3:  351:TEST_F(SetTestFixture, TestRankSetUp) {
+------------------
+_ZN33SetTestFixture_TestRankSetUp_TestD2Ev:
+        3:  351:TEST_F(SetTestFixture, TestRankSetUp) {
+------------------
+_ZN33SetTestFixture_TestRankSetUp_Test8TestBodyEv:
+        3:  351:TEST_F(SetTestFixture, TestRankSetUp) {
+        3:  352:	std::pair<int, int> pair = set.Rank(17);
+        3:  353:	int depth = pair.first;
+        3:  354:	int rank = pair.second;
+       3*:  355:	ASSERT_EQ(2, depth);
+       3*:  356:	ASSERT_EQ(7, rank);
+        -:  357:
+        3:  358:	pair = set.Rank(2);
+        3:  359:	depth = pair.first;
+        3:  360:	rank = pair.second;
+       3*:  361:	ASSERT_EQ(2, depth);
+       3*:  362:	ASSERT_EQ(1, rank);
+        -:  363:
+        3:  364:	pair = set.Rank(5);
+        3:  365:	depth = pair.first;
+        3:  366:	rank = pair.second;
+       3*:  367:	ASSERT_EQ(1, depth);
+       3*:  368:	ASSERT_EQ(2, rank);
+        -:  369:}
+------------------
+        -:  370:
+       15:  371:TEST_P(LXRotateInsertFixture, LXRotateInsertTest) {
+        6:  372:	set.Insert(5);
+        6:  373:	set.Insert(3);
+        6:  374:	std::tuple<int, int> x = GetParam();
+        -:  375:
+        6:  376:	int param = std::get<0>(x);
+        6:  377:	int expected_value = std::get<1>(x);
+        6:  378:	int is_insert = set.Insert(param);
+        -:  379:
+       6*:  380:	ASSERT_EQ(expected_value, is_insert);
+        -:  381:}
+------------------
+_ZN45LXRotateInsertFixture_LXRotateInsertTest_Test8TestBodyEv:
+        6:  371:TEST_P(LXRotateInsertFixture, LXRotateInsertTest) {
+        6:  372:	set.Insert(5);
+        6:  373:	set.Insert(3);
+        6:  374:	std::tuple<int, int> x = GetParam();
+        -:  375:
+        6:  376:	int param = std::get<0>(x);
+        6:  377:	int expected_value = std::get<1>(x);
+        6:  378:	int is_insert = set.Insert(param);
+        -:  379:
+       6*:  380:	ASSERT_EQ(expected_value, is_insert);
+        -:  381:}
+------------------
+_ZN45LXRotateInsertFixture_LXRotateInsertTest_Test13AddToRegistryEv:
+        3:  371:TEST_P(LXRotateInsertFixture, LXRotateInsertTest) {
+------------------
+_ZN45LXRotateInsertFixture_LXRotateInsertTest_TestC2Ev:
+        6:  371:TEST_P(LXRotateInsertFixture, LXRotateInsertTest) {
+------------------
+        -:  382:
+       15:  383:TEST_P(RXRotateInsertFixture, RXRotateInsertTest) {
+        6:  384:	set.Insert(5);
+        6:  385:	set.Insert(8);
+        6:  386:	std::tuple<int, int> x = GetParam();
+        -:  387:
+        6:  388:	int param = std::get<0>(x);
+        6:  389:	int expected_value = std::get<1>(x);
+        6:  390:	int is_insert = set.Insert(param);
+        -:  391:
+       6*:  392:	ASSERT_EQ(expected_value, is_insert);
+        -:  393:}
+------------------
+_ZN45RXRotateInsertFixture_RXRotateInsertTest_Test8TestBodyEv:
+        6:  383:TEST_P(RXRotateInsertFixture, RXRotateInsertTest) {
+        6:  384:	set.Insert(5);
+        6:  385:	set.Insert(8);
+        6:  386:	std::tuple<int, int> x = GetParam();
+        -:  387:
+        6:  388:	int param = std::get<0>(x);
+        6:  389:	int expected_value = std::get<1>(x);
+        6:  390:	int is_insert = set.Insert(param);
+        -:  391:
+       6*:  392:	ASSERT_EQ(expected_value, is_insert);
+        -:  393:}
+------------------
+_ZN45RXRotateInsertFixture_RXRotateInsertTest_Test13AddToRegistryEv:
+        3:  383:TEST_P(RXRotateInsertFixture, RXRotateInsertTest) {
+------------------
+_ZN45RXRotateInsertFixture_RXRotateInsertTest_TestC2Ev:
+        6:  383:TEST_P(RXRotateInsertFixture, RXRotateInsertTest) {
+------------------
+        -:  394:
+      231:  395:TEST_P(MinimumFixture, MinimumTest) {
+      114:  396:	set.Insert(1);
+      114:  397:	set.Insert(2);
+      114:  398:	set.Insert(3);
+      114:  399:	set.Insert(4);
+      114:  400:	set.Insert(5);
+      114:  401:	set.Insert(6);
+      114:  402:	set.Insert(7);
+      114:  403:	set.Insert(8);
+      114:  404:	set.Insert(9);
+      114:  405:	set.Insert(10);
+      114:  406:	set.Insert(11);
+      114:  407:	set.Insert(12);
+      114:  408:	set.Insert(13);
+      114:  409:	set.Insert(14);
+      114:  410:	set.Insert(15);
+      114:  411:	set.Insert(16);
+      114:  412:	set.Insert(17);
+      114:  413:	set.Insert(18);
+      114:  414:	set.Insert(19);
+      114:  415:	set.Insert(20);
+      114:  416:	set.Insert(21);
+      114:  417:	set.Insert(22);
+      114:  418:	set.Insert(23);
+      114:  419:	set.Insert(24);
+      114:  420:	set.Insert(25);
+      114:  421:	set.Insert(26);
+      114:  422:	set.Insert(27);
+      114:  423:	set.Insert(28);
+      114:  424:	set.Insert(29);
+      114:  425:	set.Insert(30);
+      114:  426:	set.Insert(31);
+      114:  427:	set.Insert(32);
+      114:  428:	set.Insert(33);
+      114:  429:	set.Insert(34);
+      114:  430:	set.Insert(35);
+      114:  431:	set.Insert(36);
+      114:  432:	set.Insert(37);
+      114:  433:	set.Insert(38);
+      114:  434:	std::tuple<int, int, int> x = GetParam();
+        -:  435:
+      114:  436:	int param = std::get<0>(x);
+      114:  437:	int expected_value_key = std::get<1>(x);
+      114:  438:	int expected_value_depth = std::get<2>(x);
+      114:  439:	std::pair<int, int> is_insert = set.Minimum(param);
+      114:  440:	int key = is_insert.first;
+      114:  441:	int depth = is_insert.second;
+        -:  442:
+     114*:  443:	ASSERT_EQ(expected_value_key, key);
+     114*:  444:	ASSERT_EQ(expected_value_depth, depth);
+        -:  445:}
+------------------
+_ZN31MinimumFixture_MinimumTest_Test8TestBodyEv:
+      114:  395:TEST_P(MinimumFixture, MinimumTest) {
+      114:  396:	set.Insert(1);
+      114:  397:	set.Insert(2);
+      114:  398:	set.Insert(3);
+      114:  399:	set.Insert(4);
+      114:  400:	set.Insert(5);
+      114:  401:	set.Insert(6);
+      114:  402:	set.Insert(7);
+      114:  403:	set.Insert(8);
+      114:  404:	set.Insert(9);
+      114:  405:	set.Insert(10);
+      114:  406:	set.Insert(11);
+      114:  407:	set.Insert(12);
+      114:  408:	set.Insert(13);
+      114:  409:	set.Insert(14);
+      114:  410:	set.Insert(15);
+      114:  411:	set.Insert(16);
+      114:  412:	set.Insert(17);
+      114:  413:	set.Insert(18);
+      114:  414:	set.Insert(19);
+      114:  415:	set.Insert(20);
+      114:  416:	set.Insert(21);
+      114:  417:	set.Insert(22);
+      114:  418:	set.Insert(23);
+      114:  419:	set.Insert(24);
+      114:  420:	set.Insert(25);
+      114:  421:	set.Insert(26);
+      114:  422:	set.Insert(27);
+      114:  423:	set.Insert(28);
+      114:  424:	set.Insert(29);
+      114:  425:	set.Insert(30);
+      114:  426:	set.Insert(31);
+      114:  427:	set.Insert(32);
+      114:  428:	set.Insert(33);
+      114:  429:	set.Insert(34);
+      114:  430:	set.Insert(35);
+      114:  431:	set.Insert(36);
+      114:  432:	set.Insert(37);
+      114:  433:	set.Insert(38);
+      114:  434:	std::tuple<int, int, int> x = GetParam();
+        -:  435:
+      114:  436:	int param = std::get<0>(x);
+      114:  437:	int expected_value_key = std::get<1>(x);
+      114:  438:	int expected_value_depth = std::get<2>(x);
+      114:  439:	std::pair<int, int> is_insert = set.Minimum(param);
+      114:  440:	int key = is_insert.first;
+      114:  441:	int depth = is_insert.second;
+        -:  442:
+     114*:  443:	ASSERT_EQ(expected_value_key, key);
+     114*:  444:	ASSERT_EQ(expected_value_depth, depth);
+        -:  445:}
+------------------
+_ZN31MinimumFixture_MinimumTest_Test13AddToRegistryEv:
+        3:  395:TEST_P(MinimumFixture, MinimumTest) {
+------------------
+_ZN31MinimumFixture_MinimumTest_TestC2Ev:
+      114:  395:TEST_P(MinimumFixture, MinimumTest) {
+------------------
+        -:  446:
+      231:  447:TEST_P(MaximumFixture, MaximumTest) {
+      114:  448:	set.Insert(1);
+      114:  449:	set.Insert(2);
+      114:  450:	set.Insert(3);
+      114:  451:	set.Insert(4);
+      114:  452:	set.Insert(5);
+      114:  453:	set.Insert(6);
+      114:  454:	set.Insert(7);
+      114:  455:	set.Insert(8);
+      114:  456:	set.Insert(9);
+      114:  457:	set.Insert(10);
+      114:  458:	set.Insert(11);
+      114:  459:	set.Insert(12);
+      114:  460:	set.Insert(13);
+      114:  461:	set.Insert(14);
+      114:  462:	set.Insert(15);
+      114:  463:	set.Insert(16);
+      114:  464:	set.Insert(17);
+      114:  465:	set.Insert(18);
+      114:  466:	set.Insert(19);
+      114:  467:	set.Insert(20);
+      114:  468:	set.Insert(21);
+      114:  469:	set.Insert(22);
+      114:  470:	set.Insert(23);
+      114:  471:	set.Insert(24);
+      114:  472:	set.Insert(25);
+      114:  473:	set.Insert(26);
+      114:  474:	set.Insert(27);
+      114:  475:	set.Insert(28);
+      114:  476:	set.Insert(29);
+      114:  477:	set.Insert(30);
+      114:  478:	set.Insert(31);
+      114:  479:	set.Insert(32);
+      114:  480:	set.Insert(33);
+      114:  481:	set.Insert(34);
+      114:  482:	set.Insert(35);
+      114:  483:	set.Insert(36);
+      114:  484:	set.Insert(37);
+      114:  485:	set.Insert(38);
+      114:  486:	std::tuple<int, int, int> x = GetParam();
+        -:  487:
+      114:  488:	int param = std::get<0>(x);
+      114:  489:	int expected_value_key = std::get<1>(x);
+      114:  490:	int expected_value_depth = std::get<2>(x);
+      114:  491:	std::pair<int, int> is_insert = set.Maximum(param);
+      114:  492:	int key = is_insert.first;
+      114:  493:	int depth = is_insert.second;
+        -:  494:
+     114*:  495:	ASSERT_EQ(expected_value_key, key);
+     114*:  496:	ASSERT_EQ(expected_value_depth, depth);
+        -:  497:}
+------------------
+_ZN31MaximumFixture_MaximumTest_Test8TestBodyEv:
+      114:  447:TEST_P(MaximumFixture, MaximumTest) {
+      114:  448:	set.Insert(1);
+      114:  449:	set.Insert(2);
+      114:  450:	set.Insert(3);
+      114:  451:	set.Insert(4);
+      114:  452:	set.Insert(5);
+      114:  453:	set.Insert(6);
+      114:  454:	set.Insert(7);
+      114:  455:	set.Insert(8);
+      114:  456:	set.Insert(9);
+      114:  457:	set.Insert(10);
+      114:  458:	set.Insert(11);
+      114:  459:	set.Insert(12);
+      114:  460:	set.Insert(13);
+      114:  461:	set.Insert(14);
+      114:  462:	set.Insert(15);
+      114:  463:	set.Insert(16);
+      114:  464:	set.Insert(17);
+      114:  465:	set.Insert(18);
+      114:  466:	set.Insert(19);
+      114:  467:	set.Insert(20);
+      114:  468:	set.Insert(21);
+      114:  469:	set.Insert(22);
+      114:  470:	set.Insert(23);
+      114:  471:	set.Insert(24);
+      114:  472:	set.Insert(25);
+      114:  473:	set.Insert(26);
+      114:  474:	set.Insert(27);
+      114:  475:	set.Insert(28);
+      114:  476:	set.Insert(29);
+      114:  477:	set.Insert(30);
+      114:  478:	set.Insert(31);
+      114:  479:	set.Insert(32);
+      114:  480:	set.Insert(33);
+      114:  481:	set.Insert(34);
+      114:  482:	set.Insert(35);
+      114:  483:	set.Insert(36);
+      114:  484:	set.Insert(37);
+      114:  485:	set.Insert(38);
+      114:  486:	std::tuple<int, int, int> x = GetParam();
+        -:  487:
+      114:  488:	int param = std::get<0>(x);
+      114:  489:	int expected_value_key = std::get<1>(x);
+      114:  490:	int expected_value_depth = std::get<2>(x);
+      114:  491:	std::pair<int, int> is_insert = set.Maximum(param);
+      114:  492:	int key = is_insert.first;
+      114:  493:	int depth = is_insert.second;
+        -:  494:
+     114*:  495:	ASSERT_EQ(expected_value_key, key);
+     114*:  496:	ASSERT_EQ(expected_value_depth, depth);
+        -:  497:}
+------------------
+_ZN31MaximumFixture_MaximumTest_Test13AddToRegistryEv:
+        3:  447:TEST_P(MaximumFixture, MaximumTest) {
+------------------
+_ZN31MaximumFixture_MaximumTest_TestC2Ev:
+      114:  447:TEST_P(MaximumFixture, MaximumTest) {
+------------------
+        -:  498:
+      231:  499:TEST_P(RankFixture, RankTest) {
+      114:  500:	set.Insert(1);
+      114:  501:	set.Insert(2);
+      114:  502:	set.Insert(3);
+      114:  503:	set.Insert(4);
+      114:  504:	set.Insert(5);
+      114:  505:	set.Insert(6);
+      114:  506:	set.Insert(7);
+      114:  507:	set.Insert(8);
+      114:  508:	set.Insert(9);
+      114:  509:	set.Insert(10);
+      114:  510:	set.Insert(11);
+      114:  511:	set.Insert(12);
+      114:  512:	set.Insert(13);
+      114:  513:	set.Insert(14);
+      114:  514:	set.Insert(15);
+      114:  515:	set.Insert(16);
+      114:  516:	set.Insert(17);
+      114:  517:	set.Insert(18);
+      114:  518:	set.Insert(19);
+      114:  519:	set.Insert(20);
+      114:  520:	set.Insert(21);
+      114:  521:	set.Insert(22);
+      114:  522:	set.Insert(23);
+      114:  523:	set.Insert(24);
+      114:  524:	set.Insert(25);
+      114:  525:	set.Insert(26);
+      114:  526:	set.Insert(27);
+      114:  527:	set.Insert(28);
+      114:  528:	set.Insert(29);
+      114:  529:	set.Insert(30);
+      114:  530:	set.Insert(31);
+      114:  531:	set.Insert(32);
+      114:  532:	set.Insert(33);
+      114:  533:	set.Insert(34);
+      114:  534:	set.Insert(35);
+      114:  535:	set.Insert(36);
+      114:  536:	set.Insert(37);
+      114:  537:	set.Insert(38);
+      114:  538:	std::tuple<int, int, int> x = GetParam();
+        -:  539:
+      114:  540:	int param = std::get<0>(x);
+      114:  541:	int expected_value_depth = std::get<1>(x);
+      114:  542:	int expected_value_rank = std::get<2>(x);
+      114:  543:	std::pair<int, int> is_insert = set.Rank(param);
+      114:  544:	int depth = is_insert.first;
+      114:  545:	int rank = is_insert.second;
+        -:  546:
+     114*:  547:	ASSERT_EQ(expected_value_depth, depth);
+     114*:  548:	ASSERT_EQ(expected_value_rank, rank);
+        -:  549:}
+------------------
+_ZN25RankFixture_RankTest_Test8TestBodyEv:
+      114:  499:TEST_P(RankFixture, RankTest) {
+      114:  500:	set.Insert(1);
+      114:  501:	set.Insert(2);
+      114:  502:	set.Insert(3);
+      114:  503:	set.Insert(4);
+      114:  504:	set.Insert(5);
+      114:  505:	set.Insert(6);
+      114:  506:	set.Insert(7);
+      114:  507:	set.Insert(8);
+      114:  508:	set.Insert(9);
+      114:  509:	set.Insert(10);
+      114:  510:	set.Insert(11);
+      114:  511:	set.Insert(12);
+      114:  512:	set.Insert(13);
+      114:  513:	set.Insert(14);
+      114:  514:	set.Insert(15);
+      114:  515:	set.Insert(16);
+      114:  516:	set.Insert(17);
+      114:  517:	set.Insert(18);
+      114:  518:	set.Insert(19);
+      114:  519:	set.Insert(20);
+      114:  520:	set.Insert(21);
+      114:  521:	set.Insert(22);
+      114:  522:	set.Insert(23);
+      114:  523:	set.Insert(24);
+      114:  524:	set.Insert(25);
+      114:  525:	set.Insert(26);
+      114:  526:	set.Insert(27);
+      114:  527:	set.Insert(28);
+      114:  528:	set.Insert(29);
+      114:  529:	set.Insert(30);
+      114:  530:	set.Insert(31);
+      114:  531:	set.Insert(32);
+      114:  532:	set.Insert(33);
+      114:  533:	set.Insert(34);
+      114:  534:	set.Insert(35);
+      114:  535:	set.Insert(36);
+      114:  536:	set.Insert(37);
+      114:  537:	set.Insert(38);
+      114:  538:	std::tuple<int, int, int> x = GetParam();
+        -:  539:
+      114:  540:	int param = std::get<0>(x);
+      114:  541:	int expected_value_depth = std::get<1>(x);
+      114:  542:	int expected_value_rank = std::get<2>(x);
+      114:  543:	std::pair<int, int> is_insert = set.Rank(param);
+      114:  544:	int depth = is_insert.first;
+      114:  545:	int rank = is_insert.second;
+        -:  546:
+     114*:  547:	ASSERT_EQ(expected_value_depth, depth);
+     114*:  548:	ASSERT_EQ(expected_value_rank, rank);
+        -:  549:}
+------------------
+_ZN25RankFixture_RankTest_Test13AddToRegistryEv:
+        3:  499:TEST_P(RankFixture, RankTest) {
+------------------
+_ZN25RankFixture_RankTest_TestC2Ev:
+      114:  499:TEST_P(RankFixture, RankTest) {
+------------------
+        -:  550:
+      231:  551:TEST_P(FindFixture, FindTest) {
+      114:  552:	set.Insert(1);
+      114:  553:	set.Insert(2);
+      114:  554:	set.Insert(3);
+      114:  555:	set.Insert(4);
+      114:  556:	set.Insert(5);
+      114:  557:	set.Insert(6);
+      114:  558:	set.Insert(7);
+      114:  559:	set.Insert(8);
+      114:  560:	set.Insert(9);
+      114:  561:	set.Insert(10);
+      114:  562:	set.Insert(11);
+      114:  563:	set.Insert(12);
+      114:  564:	set.Insert(13);
+      114:  565:	set.Insert(14);
+      114:  566:	set.Insert(15);
+      114:  567:	set.Insert(16);
+      114:  568:	set.Insert(17);
+      114:  569:	set.Insert(18);
+      114:  570:	set.Insert(19);
+      114:  571:	set.Insert(20);
+      114:  572:	set.Insert(21);
+      114:  573:	set.Insert(22);
+      114:  574:	set.Insert(23);
+      114:  575:	set.Insert(24);
+      114:  576:	set.Insert(25);
+      114:  577:	set.Insert(26);
+      114:  578:	set.Insert(27);
+      114:  579:	set.Insert(28);
+      114:  580:	set.Insert(29);
+      114:  581:	set.Insert(30);
+      114:  582:	set.Insert(31);
+      114:  583:	set.Insert(32);
+      114:  584:	set.Insert(33);
+      114:  585:	set.Insert(34);
+      114:  586:	set.Insert(35);
+      114:  587:	set.Insert(36);
+      114:  588:	set.Insert(37);
+      114:  589:	set.Insert(38);
+      114:  590:	std::tuple<int, int> x = GetParam();
+        -:  591:
+      114:  592:	int param = std::get<0>(x);
+      114:  593:	int expected_value = std::get<1>(x);
+      114:  594:	int is_insert = set.Find(param);
+        -:  595:
+     114*:  596:	ASSERT_EQ(expected_value, is_insert);
+        -:  597:}
+------------------
+_ZN25FindFixture_FindTest_Test8TestBodyEv:
+      114:  551:TEST_P(FindFixture, FindTest) {
+      114:  552:	set.Insert(1);
+      114:  553:	set.Insert(2);
+      114:  554:	set.Insert(3);
+      114:  555:	set.Insert(4);
+      114:  556:	set.Insert(5);
+      114:  557:	set.Insert(6);
+      114:  558:	set.Insert(7);
+      114:  559:	set.Insert(8);
+      114:  560:	set.Insert(9);
+      114:  561:	set.Insert(10);
+      114:  562:	set.Insert(11);
+      114:  563:	set.Insert(12);
+      114:  564:	set.Insert(13);
+      114:  565:	set.Insert(14);
+      114:  566:	set.Insert(15);
+      114:  567:	set.Insert(16);
+      114:  568:	set.Insert(17);
+      114:  569:	set.Insert(18);
+      114:  570:	set.Insert(19);
+      114:  571:	set.Insert(20);
+      114:  572:	set.Insert(21);
+      114:  573:	set.Insert(22);
+      114:  574:	set.Insert(23);
+      114:  575:	set.Insert(24);
+      114:  576:	set.Insert(25);
+      114:  577:	set.Insert(26);
+      114:  578:	set.Insert(27);
+      114:  579:	set.Insert(28);
+      114:  580:	set.Insert(29);
+      114:  581:	set.Insert(30);
+      114:  582:	set.Insert(31);
+      114:  583:	set.Insert(32);
+      114:  584:	set.Insert(33);
+      114:  585:	set.Insert(34);
+      114:  586:	set.Insert(35);
+      114:  587:	set.Insert(36);
+      114:  588:	set.Insert(37);
+      114:  589:	set.Insert(38);
+      114:  590:	std::tuple<int, int> x = GetParam();
+        -:  591:
+      114:  592:	int param = std::get<0>(x);
+      114:  593:	int expected_value = std::get<1>(x);
+      114:  594:	int is_insert = set.Find(param);
+        -:  595:
+     114*:  596:	ASSERT_EQ(expected_value, is_insert);
+        -:  597:}
+------------------
+_ZN25FindFixture_FindTest_Test13AddToRegistryEv:
+        3:  551:TEST_P(FindFixture, FindTest) {
+------------------
+_ZN25FindFixture_FindTest_TestC2Ev:
+      114:  551:TEST_P(FindFixture, FindTest) {
+------------------
+        -:  598:
+        3:  599:int main(int argc, char **argv){
+        3:  600:    testing::InitGoogleTest(&argc,argv);
+        3:  601:    return RUN_ALL_TESTS();
+        -:  602:}
